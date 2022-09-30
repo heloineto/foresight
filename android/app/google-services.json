@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "646109710642",
+    "project_id": "foresight-investment-tracker",
+    "storage_bucket": "foresight-investment-tracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646109710642:android:680667dee4198667a12f2b",
+        "android_client_info": {
+          "package_name": "com.example.foresight"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "646109710642-6t6io3j64ijfs9pn2t9rhfl5u7rsdhut.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXECzqpIaROO-njW1xnGFQHZ4X9Go_qTc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "646109710642-6t6io3j64ijfs9pn2t9rhfl5u7rsdhut.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

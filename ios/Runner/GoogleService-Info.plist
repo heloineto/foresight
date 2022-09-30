@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>646109710642-a3uo48q9411kt9i4aqmhqoef45ts81uh.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.646109710642-a3uo48q9411kt9i4aqmhqoef45ts81uh</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBEANEpY6sGuPp_dZpCcyJBP0QzYYM3sD4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>646109710642</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.foresight</string>
+	<key>PROJECT_ID</key>
+	<string>foresight-investment-tracker</string>
+	<key>STORAGE_BUCKET</key>
+	<string>foresight-investment-tracker.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:646109710642:ios:96ca575f4421171ca12f2b</string>
+</dict>
+</plist>
