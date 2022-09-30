@@ -2,7 +2,7 @@
 // import 'package:foresight/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:foresight/routes.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:foresight/theme.dart';
 
 Future<void> main() async {
   // await Firebase.initializeApp(
@@ -20,12 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       routes: routes,
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        textTheme: GoogleFonts.spaceGroteskTextTheme(
-          Theme.of(context).textTheme,
-        ),
-      ),
+      theme: theme,
     );
   }
 }
