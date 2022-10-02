@@ -6,6 +6,10 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MainScaffold(body: Center(child: Text('Settings')));
+    return MainScaffold(
+      body: Center(
+        child: Text('Settings'),
+      ),
+    );
   }
 }
