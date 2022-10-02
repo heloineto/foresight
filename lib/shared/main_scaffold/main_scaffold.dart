@@ -22,7 +22,9 @@ class MainScaffold extends StatelessWidget {
         disabledElevation: 0,
         highlightElevation: 0,
         // tooltip: 'Add Investment',
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/investments/create');
+        },
         backgroundColor: TW3Colors.emerald,
         child: const Icon(PhosphorIcons.currencyDollarSimple),
       ),
@@ -46,23 +48,23 @@ class MainScaffold extends StatelessWidget {
                 current: currentRoute == '/',
               ),
               BottomBarButton(
+                onPressed: () {},
+                label: 'Invest',
+                icon: PhosphorIcons.chartLineUpFill,
+              ),
+              const SizedBox(width: 24),
+              BottomBarButton(
+                onPressed: null,
+                label: 'Null',
+                icon: PhosphorIcons.xCircleFill,
+              ),
+              BottomBarButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/settings');
                 },
                 label: 'Config',
                 icon: PhosphorIcons.gearSixFill,
                 current: currentRoute == '/settings',
-              ),
-              const SizedBox(width: 24),
-              BottomBarButton(
-                onPressed: null,
-                label: 'Home',
-                icon: PhosphorIcons.houseFill,
-              ),
-              BottomBarButton(
-                onPressed: null,
-                label: 'Home',
-                icon: PhosphorIcons.houseFill,
               ),
             ],
           ),
