@@ -8,7 +8,7 @@ import 'package:foresight/settings/settings.dart';
 Map<String, StatelessWidget Function(dynamic)> routes = {
   '/': (context) => const HomePage(),
   '/enter': (context) => const EnterPage(),
-  '/investments': (context) => const InvestmentsPage(),
+  '/investments': (context) => InvestmentsPage(),
   '/investments/create': (context) => const InvestmentsFormPage(),
   '/settings': (context) => const SettingsPage(),
 };
