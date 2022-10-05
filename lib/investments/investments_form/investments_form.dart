@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:foresight/investments/constants.dart';
+import 'package:foresight/investments/investments_form/bank_field.dart';
+import 'package:foresight/investments/investments_form/product_field.dart';
 import 'package:foresight/shared/main_scaffold/main_scaffold.dart';
+import 'package:tailwind_colors/tailwind_colors.dart';
 
 class InvestmentsFormPage extends StatelessWidget {
   const InvestmentsFormPage({super.key});
@@ -22,6 +24,17 @@ class InvestmentsForm extends StatefulWidget {
 
 class _InvestmentsFormState extends State<InvestmentsForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String? name;
+  String? product;
+
+  void onSubmit() {
+    var formState = _formKey.currentState!;
+
+    if (formState.validate()) {
+      formState.save();
+      debugPrint({"name": name, "product": product}.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +45,7 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            DropdownButton<String>(
-              items: products.map((value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (_) {},
-            ),
+            ProductField(onSaved: (value) => setState(() => product = value)),
             SizedBox(height: 20),
             Autocomplete<String>(
               optionsBuilder: (TextEditingValue textEditingValue) {
@@ -57,27 +62,41 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
             TextFormField(
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: 'Enter your email',
-                label: Text('Name'),
+                hintText: 'Nome para o investimento',
+                label: Text('Nome'),
               ),
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
+                  return 'Por favor, insira um nome';
                 }
                 return null;
               },
+              onSaved: (value) => setState(() => name = value),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Validate will return true if the form is valid, or false if
-                  // the form is invalid.
-                  if (_formKey.currentState!.validate()) {
-                    // Process data.
-                  }
-                },
-                child: const Text('Submit'),
+            SizedBox(height: 20),
+            BankField(onSaved: (value) => setState(() => name = value)),
+            InputDatePickerFormField(
+              firstDate: DateTime(2021, 01, 01),
+              lastDate: DateTime(2022, 01, 01),
+            ),
+            SizedBox(height: 20),
+            Center(
+              child: TextButton(
+                style: ButtonStyle(
+                  // alignment: AlignmentDirectional.center,
+                  foregroundColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                      return Colors.white;
+                    },
+                  ),
+                  backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                      return TW3Colors.emerald;
+                    },
+                  ),
+                ),
+                onPressed: onSubmit,
+                child: const Text('Criar Investimento'),
               ),
             ),
           ],
