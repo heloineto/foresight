@@ -70,103 +70,109 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            ProductField(
-              onSaved: (value) => setState(() => product = value),
-            ),
-            Divider(height: 40),
-            BankField(
-              onSaved: (value) => setState(() => bank = value),
-            ),
-            SizedBox(height: 20),
-            DateField(
-              label: Text('Data da operação'),
-              validator: (value) {
-                if (value == null) {
-                  return 'Por favor, insira a data da operação';
-                }
-
-                return null;
-              },
-              onSaved: (value) => setState(() => startDate = value),
-            ),
-            SizedBox(height: 20),
-            DateField(
-              label: Row(
-                children: const [
-                  Text('Data de vencimento '),
-                  Text(
-                    '(opcional)',
-                    style: TextStyle(fontStyle: FontStyle.italic),
-                  )
-                ],
-              ),
-              onSaved: (value) => setState(() => endDate = value),
-            ),
-            Divider(height: 40),
-            InvestmentValueField(
-              onSaved: (value) {
-                if (value == null) return;
-
-                investmentValue = value.substring(3);
-              },
-            ),
-            SizedBox(height: 20),
-            IndexField(
-              onSaved: (value) => setState(() => index = value),
-            ),
-            SizedBox(height: 20),
-            ReturnRateField(
-              onSaved: (value) => setState(() {
-                if (value == null) return;
-
-                returnRate = value.substring(2);
-              }),
-            ),
-            SizedBox(height: 20),
-            SizedBox(
-              height: 52,
-              width: double.infinity,
-              child: TextButton(
-                style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.resolveWith<Color?>(
-                    (Set<MaterialState> states) {
-                      return Colors.white;
-                    },
-                  ),
-                  backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-                    (Set<MaterialState> states) {
-                      return TW3Colors.emerald;
-                    },
-                  ),
+      child: Expanded(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                ProductField(
+                  onSaved: (value) => setState(() => product = value),
                 ),
-                onPressed: onSubmit,
-                child: Text(
-                  'Criar Investimento',
-                  style: TextStyle(fontSize: 18),
+                Divider(height: 40),
+                BankField(
+                  onSaved: (value) => setState(() => bank = value),
                 ),
-              ),
-            ),
-            SizedBox(height: 20),
-            json != null
-                ? Container(
-                    decoration: BoxDecoration(
-                      color: TW3Colors.slate.shade200,
-                      border: Border.all(
-                        color: TW3Colors.slate.shade400,
+                SizedBox(height: 20),
+                DateField(
+                  label: Text('Data da operação'),
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Por favor, insira a data da operação';
+                    }
+
+                    return null;
+                  },
+                  onSaved: (value) => setState(() => startDate = value),
+                ),
+                SizedBox(height: 20),
+                DateField(
+                  label: Row(
+                    children: const [
+                      Text('Data de vencimento '),
+                      Text(
+                        '(opcional)',
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      )
+                    ],
+                  ),
+                  onSaved: (value) => setState(() => endDate = value),
+                ),
+                Divider(height: 40),
+                InvestmentValueField(
+                  onSaved: (value) {
+                    if (value == null) return;
+
+                    investmentValue = value.substring(3);
+                  },
+                ),
+                SizedBox(height: 20),
+                IndexField(
+                  onSaved: (value) => setState(() => index = value),
+                ),
+                SizedBox(height: 20),
+                ReturnRateField(
+                  onSaved: (value) => setState(() {
+                    if (value == null) return;
+
+                    returnRate = value.substring(2);
+                  }),
+                ),
+                SizedBox(height: 20),
+                SizedBox(
+                  height: 52,
+                  width: double.infinity,
+                  child: TextButton(
+                    style: ButtonStyle(
+                      foregroundColor:
+                          MaterialStateProperty.resolveWith<Color?>(
+                        (Set<MaterialState> states) {
+                          return Colors.white;
+                        },
                       ),
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      backgroundColor:
+                          MaterialStateProperty.resolveWith<Color?>(
+                        (Set<MaterialState> states) {
+                          return TW3Colors.emerald;
+                        },
+                      ),
                     ),
-                    width: double.infinity,
-                    padding: EdgeInsets.all(10),
-                    child: Text(json!),
-                  )
-                : SizedBox(height: 0),
-          ],
+                    onPressed: onSubmit,
+                    child: Text(
+                      'Criar Investimento',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                json != null
+                    ? Container(
+                        decoration: BoxDecoration(
+                          color: TW3Colors.slate.shade200,
+                          border: Border.all(
+                            color: TW3Colors.slate.shade400,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
+                        width: double.infinity,
+                        padding: EdgeInsets.all(10),
+                        child: Text(json!),
+                      )
+                    : SizedBox(height: 0),
+              ],
+            ),
+          ),
         ),
       ),
     );
