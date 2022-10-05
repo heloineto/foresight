@@ -1,6 +1,7 @@
 // import 'package:firebase_core/firebase_core.dart';
 // import 'package:foresight/firebase_options.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:foresight/routes.dart';
 import 'package:foresight/theme.dart';
 
@@ -21,6 +22,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       routes: routes,
       theme: theme,
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      supportedLocales: [const Locale('pt', 'BR')],
     );
   }
 }
