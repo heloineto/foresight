@@ -8,7 +8,10 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainScaffold(
       body: Center(
-        child: Text('Settings'),
+        child: TextButton(
+          child: Text("Log out"),
+          onPressed: () {},
+        ),
       ),
     );
   }

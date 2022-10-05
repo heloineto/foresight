@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:foresight/investments/investments_form/bank_field.dart';
 import 'package:foresight/investments/investments_form/index_field.dart';
 import 'package:foresight/investments/investments_form/investment_value_field.dart';
+import 'package:foresight/investments/investments_form/operation_date_field.dart';
 import 'package:foresight/investments/investments_form/product_field.dart';
 import 'package:foresight/investments/investments_form/return_rate_field.dart';
+import 'package:foresight/investments/investments_form/vesting_date_field.dart';
 import 'package:foresight/shared/form/date_field.dart';
 import 'package:foresight/shared/main_scaffold/main_scaffold.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
@@ -85,35 +87,17 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
                   onSaved: (value) => setState(() => bank = value),
                 ),
                 SizedBox(height: 20),
-                DateField(
-                  label: Text('Data da operação'),
-                  validator: (value) {
-                    if (value == null) {
-                      return 'Por favor, insira a data da operação';
-                    }
-
-                    return null;
-                  },
+                OperationDateField(
                   onSaved: (value) => setState(() => startDate = value),
                 ),
                 SizedBox(height: 20),
-                DateField(
-                  label: Row(
-                    children: const [
-                      Text('Data de vencimento '),
-                      Text(
-                        '(opcional)',
-                        style: TextStyle(fontStyle: FontStyle.italic),
-                      )
-                    ],
-                  ),
+                VestingDateField(
                   onSaved: (value) => setState(() => endDate = value),
                 ),
                 Divider(height: 40),
                 InvestmentValueField(
                   onSaved: (value) {
                     if (value == null) return;
-
                     investmentValue = value.substring(3);
                   },
                 ),
@@ -125,7 +109,6 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
                 ReturnRateField(
                   onSaved: (value) => setState(() {
                     if (value == null) return;
-
                     returnRate = value.substring(2);
                   }),
                 ),
