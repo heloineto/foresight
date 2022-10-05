@@ -2,14 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foresight/utils/convert_date.dart';
 import 'package:foresight/utils/hex_color.dart';
+import 'package:intl/intl.dart';
+
+final brlFormatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
 
 class Investment extends StatelessWidget {
   final String? bankName;
   final DateTime? investmentDate;
   final double? investmentValue;
 
-  const Investment(
-      {super.key, this.bankName, this.investmentDate, this.investmentValue});
+  const Investment({
+    super.key,
+    this.bankName,
+    this.investmentDate,
+    this.investmentValue,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +43,7 @@ class Investment extends StatelessWidget {
             ],
           ),
           Text(
-            'R\$ $investmentValue',
+            brlFormatter.format(investmentValue),
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ],

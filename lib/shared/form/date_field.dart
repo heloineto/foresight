@@ -7,8 +7,16 @@ class DateField extends StatelessWidget {
   final DateFormat format = DateFormat('dd/MM/yyyy');
   final Widget? label;
   final String? hintText;
+  final void Function(DateTime?)? onSaved;
+  final String? Function(DateTime?)? validator;
 
-  DateField({super.key, required this.label, this.hintText});
+  DateField({
+    super.key,
+    required this.label,
+    this.hintText,
+    this.onSaved,
+    this.validator,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +37,8 @@ class DateField extends StatelessWidget {
 
         return date;
       },
+      validator: validator,
+      onSaved: onSaved,
     );
   }
 }

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:foresight/investments/investments_form/bank_field.dart';
 import 'package:foresight/investments/investments_form/index_field.dart';
+import 'package:foresight/investments/investments_form/investment_value_field.dart';
 import 'package:foresight/investments/investments_form/name_field.dart';
 import 'package:foresight/investments/investments_form/product_field.dart';
+import 'package:foresight/investments/investments_form/return_rate_field.dart';
 import 'package:foresight/shared/form/date_field.dart';
-import 'package:foresight/shared/form/dropdown_field.dart';
 import 'package:foresight/shared/main_scaffold/main_scaffold.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 
@@ -32,13 +33,23 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
   String? bank;
   String? product;
   String? index;
+  String? investmentValue;
+  DateTime? startDate;
+  DateTime? endDate;
 
   void onSubmit() {
     var formState = _formKey.currentState!;
 
     if (formState.validate()) {
       formState.save();
-      debugPrint({"name": name, "product": product}.toString());
+      debugPrint({
+        'name': name,
+        'bank': bank,
+        'product': product,
+        'index': index,
+        'startDate': startDate,
+        'endDate': endDate,
+      }.toString());
     }
   }
 
@@ -47,7 +58,7 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
     return Form(
       key: _formKey,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -63,7 +74,17 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
               onSaved: (value) => setState(() => bank = value),
             ),
             SizedBox(height: 20),
-            DateField(label: Text('Data da operação')),
+            DateField(
+              label: Text('Data da operação'),
+              validator: (value) {
+                if (value == null) {
+                  return 'Por favor, insira a data da operação';
+                }
+
+                return null;
+              },
+              onSaved: (value) => setState(() => startDate = value),
+            ),
             SizedBox(height: 20),
             DateField(
               label: Row(
@@ -75,11 +96,18 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
                   )
                 ],
               ),
+              onSaved: (value) => setState(() => endDate = value),
             ),
             Divider(height: 40),
+            InvestmentValueField(
+              onSaved: (value) => investmentValue = value,
+            ),
+            SizedBox(height: 20),
             IndexField(
               onSaved: (value) => setState(() => index = value),
             ),
+            SizedBox(height: 20),
+            ReturnRateField(),
             Center(
               child: TextButton(
                 style: ButtonStyle(
