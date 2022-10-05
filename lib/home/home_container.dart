@@ -8,7 +8,7 @@ class HomeContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-          child: Column(children: <Widget>[
+      child: Column(children: <Widget>[
         Container(
           margin: EdgeInsets.only(top: 50, bottom: 8),
           child: Text('Seu saldo atual é de:', style: TextStyle(fontSize: 18)),

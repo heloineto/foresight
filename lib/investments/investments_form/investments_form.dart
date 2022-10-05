@@ -71,7 +71,7 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
     return Form(
       key: _formKey,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

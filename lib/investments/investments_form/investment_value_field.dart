@@ -12,7 +12,7 @@ class CurrencyInputFormatter extends TextInputFormatter {
       return newValue;
     }
 
-    // ! Catch errors
+    debugPrint(newValue.text);
     double value = double.parse(newValue.text);
 
     String newText = brlFormatter.format(value / 100);

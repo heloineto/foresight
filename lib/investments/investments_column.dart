@@ -26,9 +26,10 @@ class InvestmentsColumn extends StatelessWidget {
                 (investment) => Column(
                   children: <Widget>[
                     Investment(
-                        bankName: investment['bank'] as String,
-                        investmentDate: investment['date'] as DateTime,
-                        investmentValue: investment['value'] as double),
+                      bankName: investment['bank'] as String,
+                      investmentDate: investment['date'] as DateTime,
+                      investmentValue: investment['value'] as double,
+                    ),
                     Divider(
                       color: HexColor('#E0E0E0'),
                       thickness: 1,

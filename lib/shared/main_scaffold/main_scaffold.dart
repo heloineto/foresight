@@ -48,9 +48,12 @@ class MainScaffold extends StatelessWidget {
                 current: currentRoute == '/',
               ),
               BottomBarButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/investments');
+                },
                 label: 'Invest',
                 icon: PhosphorIcons.chartLineUpFill,
+                current: currentRoute == '/investments',
               ),
               const SizedBox(width: 24),
               BottomBarButton(

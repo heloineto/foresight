@@ -1,15 +1,9 @@
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:foresight/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:foresight/routes.dart';
 import 'package:foresight/theme.dart';
 
 Future<void> main() async {
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
-
   runApp(const MyApp());
 }
 
@@ -19,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Foresight',
       routes: routes,
       theme: theme,
       localizationsDelegates: const [
