@@ -43,14 +43,15 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
 
     if (formState.validate()) {
       formState.save();
+
       debugPrint({
+        'product': product,
         'name': name,
         'bank': bank,
-        'product': product,
-        'index': index,
         'startDate': startDate,
         'endDate': endDate,
         'investmentValue': investmentValue,
+        'index': index,
         'returnRate': returnRate,
       }.toString());
     }
@@ -103,14 +104,22 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
             ),
             Divider(height: 40),
             InvestmentValueField(
-              onSaved: (value) => investmentValue = value,
+              onSaved: (value) {
+                // ! FORMAT investmentValue
+                investmentValue = value;
+              },
             ),
             SizedBox(height: 20),
             IndexField(
               onSaved: (value) => setState(() => index = value),
             ),
             SizedBox(height: 20),
-            ReturnRateField(),
+            ReturnRateField(
+              onSaved: (value) => setState(() {
+                // ! FORMAT returnRate
+                returnRate = value;
+              }),
+            ),
             Center(
               child: TextButton(
                 style: ButtonStyle(
