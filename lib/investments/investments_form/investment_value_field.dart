@@ -4,14 +4,9 @@ import 'package:intl/intl.dart';
 
 final brlFormatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
 
-//! BUGS ON NEGATIVE NUMBERS
 class CurrencyInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(oldValue, newValue) {
-    if (newValue.selection.baseOffset == 0) {
-      return newValue;
-    }
-
     debugPrint(newValue.text);
     double value = double.parse(newValue.text);
 

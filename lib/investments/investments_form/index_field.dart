@@ -8,11 +8,6 @@ const List<String> indexes = [
   'SELIC',
   'IGPM',
   'IGPDI',
-  //! CDI+
-  //! IPCA+
-  //! SELIC+
-  //! IGPM+
-  //! IGPDI+
 ];
 
 class IndexField extends StatelessWidget {

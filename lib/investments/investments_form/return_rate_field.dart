@@ -14,11 +14,13 @@ String formatPercentage(dynamic number) {
   return '% ${percentage.substring(0, percentage.length - 1)}';
 }
 
-//! BUGS ON NEGATIVE NUMBERS
+num parsePercentage(String percentage) {
+  return percentageFormatter.parse('${percentage.substring(2)} %');
+}
+
 class PercentageInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(oldValue, newValue) {
-    // ! Catch errors
     double value = double.parse(newValue.text);
 
     String newText = formatPercentage(value / 10000);
@@ -50,8 +52,7 @@ class ReturnRateField extends StatelessWidget {
           return 'Por favor, insira uma rentabilidade';
         }
 
-        // ! This seems to work, but is not really correct
-        num numberValue = percentageFormatter.parse(value);
+        num numberValue = parsePercentage(value);
 
         if (numberValue == 0) {
           return 'A rentabilidade precisa ser maior que ${percentageFormatter.format(0)}';
