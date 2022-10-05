@@ -7,14 +7,12 @@ final brlFormatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
 //! BUGS ON NEGATIVE NUMBERS
 class CurrencyInputFormatter extends TextInputFormatter {
   @override
-  TextEditingValue formatEditUpdate(
-    TextEditingValue oldValue,
-    TextEditingValue newValue,
-  ) {
+  TextEditingValue formatEditUpdate(oldValue, newValue) {
     if (newValue.selection.baseOffset == 0) {
       return newValue;
     }
 
+    // ! Catch errors
     double value = double.parse(newValue.text);
 
     String newText = brlFormatter.format(value / 100);
@@ -42,7 +40,7 @@ class InvestmentValueField extends StatelessWidget {
       initialValue: brlFormatter.format(0),
       validator: (String? value) {
         if (value == null || value.isEmpty) {
-          return 'Por favor, insira um valor';
+          return 'Por favor, insira um valor investido';
         }
 
         num numberValue = brlFormatter.parse(value);

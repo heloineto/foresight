@@ -29,13 +29,14 @@ class InvestmentsForm extends StatefulWidget {
 
 class _InvestmentsFormState extends State<InvestmentsForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String? product;
   String? name;
   String? bank;
-  String? product;
-  String? index;
-  String? investmentValue;
   DateTime? startDate;
   DateTime? endDate;
+  String? investmentValue;
+  String? index;
+  String? returnRate;
 
   void onSubmit() {
     var formState = _formKey.currentState!;
@@ -49,6 +50,8 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
         'index': index,
         'startDate': startDate,
         'endDate': endDate,
+        'investmentValue': investmentValue,
+        'returnRate': returnRate,
       }.toString());
     }
   }
