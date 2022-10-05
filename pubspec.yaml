@@ -35,7 +35,6 @@ dependencies:
     sdk: flutter
 
   firebase_core: ^1.24.0
-  cloud_firestore: ^3.5.0
   cupertino_icons: ^1.0.2
   google_fonts: ^3.0.1
   phosphor_flutter: ^1.4.0

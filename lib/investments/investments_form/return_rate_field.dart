@@ -44,7 +44,6 @@ class ReturnRateField extends StatelessWidget {
         border: OutlineInputBorder(),
         hintText: 'Rentabilidade',
         label: Text('Rentabilidade'),
-        // prefixIcon: Icon(PhosphorIcons.percent),
       ),
       initialValue: formatPercentage(0),
       validator: (String? value) {

@@ -21,7 +21,6 @@ class MainScaffold extends StatelessWidget {
         focusElevation: 0,
         disabledElevation: 0,
         highlightElevation: 0,
-        // tooltip: 'Add Investment',
         onPressed: () {
           Navigator.pushNamed(context, '/investments/create');
         },
