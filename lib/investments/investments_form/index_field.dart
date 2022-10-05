@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:foresight/shared/form/dropdown_field.dart';
 
-const List<String> products = [
-  'CDB',
-  'LCI',
-  'LCA',
-  'CRI',
-  'CRA',
-  'RDB',
-  'LC',
-  'LIG',
-  'CPR'
+const List<String> indexes = [
+  'Pré',
+  'CDI',
+  'IPCA',
+  'SELIC',
+  'IGPM',
+  'IGPDI',
+  //! CDI+
+  //! IPCA+
+  //! SELIC+
+  //! IGPM+
+  //! IGPDI+
 ];
 
-class ProductField extends StatelessWidget {
+class IndexField extends StatelessWidget {
   final void Function(String?)? onSaved;
 
-  const ProductField({super.key, this.onSaved});
+  const IndexField({super.key, this.onSaved});
 
   @override
   Widget build(BuildContext context) {
     return DropdownField(
-      hintText: 'Produto',
-      label: Text('Produto'),
-      items: products.map((value) {
+      hintText: 'Indexador',
+      label: Text('Indexador'),
+      items: indexes.map((value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
@@ -31,7 +33,7 @@ class ProductField extends StatelessWidget {
       }).toList(),
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Por favor, insira um produto';
+          return 'Por favor, insira um indexador';
         }
 
         return null;

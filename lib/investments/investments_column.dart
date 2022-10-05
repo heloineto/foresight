@@ -19,19 +19,26 @@ class InvestmentsColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: SingleChildScrollView(
-            child: Column(
-                children: _investments
-                    .map((investment) => Column(children: <Widget>[
-                          Investment(
-                              bankName: investment['bank'] as String,
-                              investmentDate: investment['date'] as DateTime,
-                              investmentValue: investment['value'] as double),
-                          Divider(
-                            color: HexColor('#E0E0E0'),
-                            thickness: 1,
-                          )
-                        ]))
-                    .toList())));
+      child: SingleChildScrollView(
+        child: Column(
+          children: _investments
+              .map(
+                (investment) => Column(
+                  children: <Widget>[
+                    Investment(
+                        bankName: investment['bank'] as String,
+                        investmentDate: investment['date'] as DateTime,
+                        investmentValue: investment['value'] as double),
+                    Divider(
+                      color: HexColor('#E0E0E0'),
+                      thickness: 1,
+                    )
+                  ],
+                ),
+              )
+              .toList(),
+        ),
+      ),
+    );
   }
 }

@@ -10,16 +10,21 @@ class InvestmentsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-            width: double.infinity,
-            padding: EdgeInsets.only(
-                top: isItOccupyingEntireScreen ?? false ? 35 : 15),
-            color: Colors.white,
-            child: Align(
-                alignment: Alignment.center,
-                child: Column(children: <Widget>[
-                  InvestmentsHeader(),
-                  InvestmentsColumn(),
-                ]))));
+      body: Container(
+        width: double.infinity,
+        padding:
+            EdgeInsets.only(top: isItOccupyingEntireScreen ?? false ? 35 : 15),
+        color: Colors.white,
+        child: Align(
+          alignment: Alignment.center,
+          child: Column(
+            children: <Widget>[
+              InvestmentsHeader(),
+              InvestmentsColumn(),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

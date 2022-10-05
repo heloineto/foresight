@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:foresight/investments/investments_form/bank_field.dart';
+import 'package:foresight/investments/investments_form/index_field.dart';
 import 'package:foresight/investments/investments_form/product_field.dart';
+import 'package:foresight/shared/form/date_field.dart';
+import 'package:foresight/shared/form/dropdown_field.dart';
 import 'package:foresight/shared/main_scaffold/main_scaffold.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 
@@ -26,6 +29,7 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String? name;
   String? product;
+  String? index;
 
   void onSubmit() {
     var formState = _formKey.currentState!;
@@ -46,19 +50,7 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             ProductField(onSaved: (value) => setState(() => product = value)),
-            SizedBox(height: 20),
-            Autocomplete<String>(
-              optionsBuilder: (TextEditingValue textEditingValue) {
-                if (textEditingValue.text == '') {
-                  return const Iterable<String>.empty();
-                }
-                return banks.where((String option) {
-                  return option.contains(textEditingValue.text.toLowerCase());
-                });
-              },
-              onSelected: (bank) {},
-            ),
-            SizedBox(height: 20),
+            Divider(height: 40),
             TextFormField(
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
@@ -75,15 +67,29 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
             ),
             SizedBox(height: 20),
             BankField(onSaved: (value) => setState(() => name = value)),
-            InputDatePickerFormField(
-              firstDate: DateTime(2021, 01, 01),
-              lastDate: DateTime(2022, 01, 01),
-            ),
             SizedBox(height: 20),
+            DateField(label: Text('Data da operação')),
+            SizedBox(height: 20),
+            DateField(
+              label: Row(
+                children: const [
+                  Text('Data de vencimento '),
+                  Text(
+                    '(opcional)',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  )
+                ],
+              ),
+            ),
+            Divider(height: 40),
+            Row(
+              children: [
+                IndexField(onSaved: (value) => setState(() => index = value)),
+              ],
+            ),
             Center(
               child: TextButton(
                 style: ButtonStyle(
-                  // alignment: AlignmentDirectional.center,
                   foregroundColor: MaterialStateProperty.resolveWith<Color?>(
                     (Set<MaterialState> states) {
                       return Colors.white;

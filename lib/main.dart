@@ -22,11 +22,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       routes: routes,
       theme: theme,
-      localizationsDelegates: [
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate
       ],
-      supportedLocales: [const Locale('pt', 'BR')],
+      supportedLocales: const [Locale('pt', 'BR')],
     );
   }
 }
