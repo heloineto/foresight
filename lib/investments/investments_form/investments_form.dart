@@ -22,7 +22,7 @@ class InvestmentsFormPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
-      body: InvestmentsForm(),
+      body: SafeArea(child: InvestmentsForm()),
     );
   }
 }
