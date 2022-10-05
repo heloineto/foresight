@@ -1,13 +1,20 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:foresight/investments/investments_form/bank_field.dart';
 import 'package:foresight/investments/investments_form/index_field.dart';
 import 'package:foresight/investments/investments_form/investment_value_field.dart';
-import 'package:foresight/investments/investments_form/name_field.dart';
 import 'package:foresight/investments/investments_form/product_field.dart';
 import 'package:foresight/investments/investments_form/return_rate_field.dart';
 import 'package:foresight/shared/form/date_field.dart';
 import 'package:foresight/shared/main_scaffold/main_scaffold.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
+
+String prettyJson(dynamic json) {
+  var spaces = ' ' * 4;
+  var encoder = JsonEncoder.withIndent(spaces);
+  return encoder.convert(json);
+}
 
 class InvestmentsFormPage extends StatelessWidget {
   const InvestmentsFormPage({super.key});
@@ -30,7 +37,6 @@ class InvestmentsForm extends StatefulWidget {
 class _InvestmentsFormState extends State<InvestmentsForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String? product;
-  String? name;
   String? bank;
   DateTime? startDate;
   DateTime? endDate;
@@ -38,22 +44,25 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
   String? index;
   String? returnRate;
 
+  String? json;
+
   void onSubmit() {
     var formState = _formKey.currentState!;
 
     if (formState.validate()) {
       formState.save();
 
-      debugPrint({
+      var investment = {
         'product': product,
-        'name': name,
         'bank': bank,
-        'startDate': startDate,
-        'endDate': endDate,
+        'startDate': startDate.toString(),
+        'endDate': endDate.toString(),
         'investmentValue': investmentValue,
         'index': index,
         'returnRate': returnRate,
-      }.toString());
+      };
+
+      json = prettyJson(investment);
     }
   }
 
@@ -70,10 +79,6 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
               onSaved: (value) => setState(() => product = value),
             ),
             Divider(height: 40),
-            NameField(
-              onSaved: (value) => setState(() => name = value),
-            ),
-            SizedBox(height: 20),
             BankField(
               onSaved: (value) => setState(() => bank = value),
             ),
@@ -105,8 +110,9 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
             Divider(height: 40),
             InvestmentValueField(
               onSaved: (value) {
-                // ! FORMAT investmentValue
-                investmentValue = value;
+                if (value == null) return;
+
+                investmentValue = value.substring(3);
               },
             ),
             SizedBox(height: 20),
@@ -116,11 +122,15 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
             SizedBox(height: 20),
             ReturnRateField(
               onSaved: (value) => setState(() {
-                // ! FORMAT returnRate
-                returnRate = value;
+                if (value == null) return;
+
+                returnRate = value.substring(2);
               }),
             ),
-            Center(
+            SizedBox(height: 20),
+            SizedBox(
+              height: 52,
+              width: double.infinity,
               child: TextButton(
                 style: ButtonStyle(
                   foregroundColor: MaterialStateProperty.resolveWith<Color?>(
@@ -135,9 +145,27 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
                   ),
                 ),
                 onPressed: onSubmit,
-                child: const Text('Criar Investimento'),
+                child: Text(
+                  'Criar Investimento',
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
             ),
+            SizedBox(height: 20),
+            json != null
+                ? Container(
+                    decoration: BoxDecoration(
+                      color: TW3Colors.slate.shade200,
+                      border: Border.all(
+                        color: TW3Colors.slate.shade400,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                    ),
+                    width: double.infinity,
+                    padding: EdgeInsets.all(10),
+                    child: Text(json!),
+                  )
+                : SizedBox(height: 0),
           ],
         ),
       ),
