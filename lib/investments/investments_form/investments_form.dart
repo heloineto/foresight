@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foresight/investments/investments_form/bank_field.dart';
 import 'package:foresight/investments/investments_form/index_field.dart';
+import 'package:foresight/investments/investments_form/name_field.dart';
 import 'package:foresight/investments/investments_form/product_field.dart';
 import 'package:foresight/shared/form/date_field.dart';
 import 'package:foresight/shared/form/dropdown_field.dart';
@@ -28,6 +29,7 @@ class InvestmentsForm extends StatefulWidget {
 class _InvestmentsFormState extends State<InvestmentsForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String? name;
+  String? bank;
   String? product;
   String? index;
 
@@ -49,24 +51,17 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            ProductField(onSaved: (value) => setState(() => product = value)),
+            ProductField(
+              onSaved: (value) => setState(() => product = value),
+            ),
             Divider(height: 40),
-            TextFormField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Nome para o investimento',
-                label: Text('Nome'),
-              ),
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return 'Por favor, insira um nome';
-                }
-                return null;
-              },
+            NameField(
               onSaved: (value) => setState(() => name = value),
             ),
             SizedBox(height: 20),
-            BankField(onSaved: (value) => setState(() => name = value)),
+            BankField(
+              onSaved: (value) => setState(() => bank = value),
+            ),
             SizedBox(height: 20),
             DateField(label: Text('Data da operação')),
             SizedBox(height: 20),
@@ -82,10 +77,8 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
               ),
             ),
             Divider(height: 40),
-            Row(
-              children: [
-                IndexField(onSaved: (value) => setState(() => index = value)),
-              ],
+            IndexField(
+              onSaved: (value) => setState(() => index = value),
             ),
             Center(
               child: TextButton(
