@@ -10,23 +10,31 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
-      body: Column(children: <Widget>[
-        Expanded(
-          flex: 3,
+      body: Container(
+        color: TW3Colors.slate.shade200,
+        child: SafeArea(
           child: Container(
-            color: TW3Colors.slate.shade200,
-            child: HomeContainer(),
+            color: Colors.white,
+            child: Column(children: <Widget>[
+              Expanded(
+                flex: 3,
+                child: Container(
+                  color: TW3Colors.slate.shade200,
+                  child: HomeContainer(),
+                ),
+              ),
+              SizedBox(height: 10),
+              Expanded(
+                flex: 5,
+                child: GestureDetector(
+                  onTap: () => Navigator.pushNamed(context, '/investments'),
+                  child: Investments(),
+                ),
+              ),
+            ]),
           ),
         ),
-        SizedBox(height: 10),
-        Expanded(
-          flex: 5,
-          child: GestureDetector(
-            onTap: () => Navigator.pushNamed(context, '/investments'),
-            child: Investments(),
-          ),
-        ),
-      ]),
+      ),
     );
   }
 }

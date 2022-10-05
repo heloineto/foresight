@@ -57,17 +57,17 @@ class MainScaffold extends StatelessWidget {
               ),
               const SizedBox(width: 24),
               BottomBarButton(
-                onPressed: null,
-                label: 'Null',
-                icon: PhosphorIcons.xCircleFill,
-              ),
-              BottomBarButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/settings');
                 },
                 label: 'Config',
                 icon: PhosphorIcons.gearSixFill,
                 current: currentRoute == '/settings',
+              ),
+              BottomBarButton(
+                onPressed: null,
+                label: 'Sair',
+                icon: PhosphorIcons.signOutFill,
               ),
             ],
           ),
