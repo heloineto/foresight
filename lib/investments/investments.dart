@@ -7,14 +7,11 @@ class Investments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: Column(
-        children: <Widget>[
-          InvestmentsHeader(),
-          InvestmentsColumn(),
-        ],
-      ),
+    return Column(
+      children: <Widget>[
+        InvestmentsHeader(),
+        InvestmentsColumn(),
+      ],
     );
   }
 }

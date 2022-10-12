@@ -6,10 +6,11 @@ class InvestmentsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 25),
+      width: double.maxFinite,
+      margin: EdgeInsets.all(25),
       child: Text(
         'Investimentos',
-        style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
       ),
     );
   }

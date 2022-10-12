@@ -25,12 +25,15 @@ class BottomBarButton extends StatelessWidget {
         children: [
           Icon(
             icon,
-            color: current ? TW3Colors.emerald[500] : TW3Colors.slate[500],
+            color:
+                current ? TW3Colors.emerald.shade500 : TW3Colors.slate.shade500,
           ),
           Text(
             label,
             style: TextStyle(
-              color: current ? TW3Colors.emerald[600] : TW3Colors.slate[600],
+              color: current
+                  ? TW3Colors.emerald.shade600
+                  : TW3Colors.slate.shade600,
             ),
           ),
         ],
