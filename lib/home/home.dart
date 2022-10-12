@@ -12,7 +12,6 @@ class HomePage extends StatelessWidget {
     return MainScaffold(
       body: Container(
         color: TW3Colors.slate.shade200,
-        child: SafeArea(
           child: Container(
             color: Colors.white,
             child: Column(children: <Widget>[
@@ -33,7 +32,6 @@ class HomePage extends StatelessWidget {
               ),
             ]),
           ),
-        ),
       ),
     );
   }
