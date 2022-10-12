@@ -7,15 +7,15 @@ import 'package:intl/intl.dart';
 final brlFormatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
 
 class Investment extends StatelessWidget {
-  final String? bankName;
-  final DateTime? investmentDate;
-  final double? investmentValue;
+  final String bankName;
+  final DateTime investmentDate;
+  final double investmentValue;
 
   const Investment({
     super.key,
-    this.bankName,
-    this.investmentDate,
-    this.investmentValue,
+    required this.bankName,
+    required this.investmentDate,
+    required this.investmentValue,
   });
 
   @override
@@ -30,14 +30,14 @@ class Investment extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                bankName ?? '',
+                bankName,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: HexColor('#333335'),
                 ),
               ),
               Text(
-                convertFromDateTime2String(investmentDate),
+                dateTimeToString(investmentDate),
                 style: TextStyle(color: HexColor('#979797')),
               )
             ],
