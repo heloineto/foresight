@@ -11,7 +11,7 @@ class SettingsPage extends StatelessWidget {
     return MainScaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(24),
+          padding: EdgeInsets.all(25),
           child: SizedBox(
             height: 52,
             width: double.infinity,

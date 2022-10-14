@@ -75,7 +75,7 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
       child: Expanded(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.all(25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
