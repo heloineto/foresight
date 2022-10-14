@@ -45,6 +45,7 @@ class InvestmentsColumn extends StatelessWidget {
                     Divider(
                       color: TW3Colors.slate.shade200,
                       thickness: 1,
+                      height: 1,
                     ),
                   Investment(
                     bankName: investments[i]['bank'] as String,
