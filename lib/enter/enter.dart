@@ -33,21 +33,27 @@ class EnterPage extends StatelessWidget {
               'Ou crie sua conta',
               style: TextStyle(fontSize: 20),
             ),
-            SizedBox(height: 50),
-            MaterialButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/');
-              },
-              padding: EdgeInsets.all(20),
-              color: Color(0xFF1877F2),
-              minWidth: double.maxFinite,
-              child: Text(
-                'Continuar com o Facebook',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                  letterSpacing: 1,
+            SizedBox(height: 40),
+            Material(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(7),
+              ),
+              clipBehavior: Clip.antiAlias,
+              child: MaterialButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/');
+                },
+                padding: EdgeInsets.all(20),
+                color: Color(0xFF1877F2),
+                minWidth: double.maxFinite,
+                child: Text(
+                  'Continuar com o Facebook',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    letterSpacing: 1,
+                  ),
                 ),
               ),
             )
