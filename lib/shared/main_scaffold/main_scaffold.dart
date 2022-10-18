@@ -65,7 +65,9 @@ class MainScaffold extends StatelessWidget {
                 current: currentRoute == '/settings',
               ),
               BottomBarButton(
-                onPressed: null,
+                onPressed: () {
+                  Navigator.pushNamed(context, '/enter');
+                },
                 label: 'Sair',
                 icon: PhosphorIcons.signOutFill,
               ),

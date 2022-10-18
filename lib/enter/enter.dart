@@ -6,11 +6,17 @@ class EnterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          child: Text("Hello"),
-          onPressed: null,
-        ),
+      body: Column(
+        children: [
+          Text('Entrar'),
+          Text('Ou crie sua conta'),
+          MaterialButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/');
+            },
+            child: Text("Continar com o Facebook"),
+          )
+        ],
       ),
     );
   }
