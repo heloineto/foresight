@@ -42,42 +42,16 @@ class _AppState extends State<App> {
           );
         }
 
-        return StreamBuilder(
-            stream: AuthService().userStream,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Text(
-                  'auth loading',
-                  textDirection: TextDirection.ltr,
-                );
-              }
-
-              if (snapshot.hasError) {
-                return const Text(
-                  'auth error',
-                  textDirection: TextDirection.ltr,
-                );
-              }
-
-              if (!snapshot.hasData) {
-                return MaterialApp(
-                  title: 'Foresight',
-                  home: EnterPage(),
-                  theme: theme,
-                );
-              }
-
-              return MaterialApp(
-                title: 'Foresight',
-                routes: routes,
-                theme: theme,
-                localizationsDelegates: const [
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate
-                ],
-                supportedLocales: const [Locale('pt', 'BR')],
-              );
-            });
+        return MaterialApp(
+          title: 'Foresight',
+          routes: routes,
+          theme: theme,
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate
+          ],
+          supportedLocales: const [Locale('pt', 'BR')],
+        );
       },
     );
   }

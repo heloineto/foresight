@@ -81,9 +81,5 @@ class Investment extends StatelessWidget {
         ),
       ),
     );
-
-    // return Slidable(
-    //   child:
-    // );
   }
 }

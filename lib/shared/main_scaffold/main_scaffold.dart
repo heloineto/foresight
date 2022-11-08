@@ -66,7 +66,7 @@ class MainScaffold extends StatelessWidget {
                 current: currentRoute == '/settings',
               ),
               BottomBarButton(
-                onPressed: () async {
+                onPressed: () {
                   AuthService().signOut();
 
                   Navigator.pushNamedAndRemoveUntil(
