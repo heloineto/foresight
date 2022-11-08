@@ -155,7 +155,7 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
                         ),
                         width: double.infinity,
                         padding: EdgeInsets.all(10),
-                        child: Text(json!),
+                        child: Text(json ?? ''),
                       )
                     : SizedBox(height: 0),
               ],

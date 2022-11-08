@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:foresight/enter/enter.dart';
+import 'package:foresight/firebase_options.dart';
 import 'package:foresight/routes.dart';
 import 'package:foresight/services/auth.dart';
 import 'package:foresight/theme.dart';
@@ -19,7 +20,8 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  final Future<FirebaseApp> _initialization =
+      Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +64,6 @@ class _AppState extends State<App> {
                   title: 'Foresight',
                   home: EnterPage(),
                   theme: theme,
-                  localizationsDelegates: const [
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate
-                  ],
-                  supportedLocales: const [Locale('pt', 'BR')],
                 );
               }
 

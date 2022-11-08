@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foresight/services/auth.dart';
 import 'package:foresight/shared/main_scaffold/bottom_bar_button.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
@@ -65,8 +66,14 @@ class MainScaffold extends StatelessWidget {
                 current: currentRoute == '/settings',
               ),
               BottomBarButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/enter');
+                onPressed: () async {
+                  AuthService().signOut();
+
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    '/',
+                    (route) => false,
+                  );
                 },
                 label: 'Sair',
                 icon: PhosphorIcons.signOutFill,
