@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:foresight/enter/enter.dart';
 import 'package:foresight/routes.dart';
+import 'package:foresight/services/auth.dart';
 import 'package:foresight/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -25,23 +27,60 @@ class _AppState extends State<App> {
       future: _initialization,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Text('Error');
+          return Text(
+            'error',
+            textDirection: TextDirection.ltr,
+          );
         }
 
         if (snapshot.connectionState != ConnectionState.done) {
-          return Text('loading');
+          return Text(
+            'loading',
+            textDirection: TextDirection.ltr,
+          );
         }
 
-        return MaterialApp(
-          title: 'Foresight',
-          routes: routes,
-          theme: theme,
-          localizationsDelegates: const [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate
-          ],
-          supportedLocales: const [Locale('pt', 'BR')],
-        );
+        return StreamBuilder(
+            stream: AuthService().userStream,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Text(
+                  'auth loading',
+                  textDirection: TextDirection.ltr,
+                );
+              }
+
+              if (snapshot.hasError) {
+                return const Text(
+                  'auth error',
+                  textDirection: TextDirection.ltr,
+                );
+              }
+
+              if (!snapshot.hasData) {
+                return MaterialApp(
+                  title: 'Foresight',
+                  home: EnterPage(),
+                  theme: theme,
+                  localizationsDelegates: const [
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate
+                  ],
+                  supportedLocales: const [Locale('pt', 'BR')],
+                );
+              }
+
+              return MaterialApp(
+                title: 'Foresight',
+                routes: routes,
+                theme: theme,
+                localizationsDelegates: const [
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate
+                ],
+                supportedLocales: const [Locale('pt', 'BR')],
+              );
+            });
       },
     );
   }

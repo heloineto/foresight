@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["formfield", "IGPDI", "IGPM"]
+  "cSpell.words": ["formfield", "IGPDI", "IGPM"],
+  "java.configuration.updateBuildConfiguration": "interactive"
 }
