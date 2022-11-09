@@ -78,6 +78,7 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
       formState.save();
 
       var investment = {
+        'id': widget.currentInvestment?.id,
         'product': product,
         'bank': bank,
         'startDate': startDate.toString(),
@@ -152,6 +153,7 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
                 ),
                 SizedBox(height: 20),
                 IndexField(
+                  initialValue: widget.currentInvestment?.index,
                   onSaved: (value) => setState(() => index = value),
                 ),
                 SizedBox(height: 20),
