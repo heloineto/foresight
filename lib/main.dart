@@ -39,9 +39,8 @@ class _AppState extends State<App> {
         }
 
         if (snapshot.connectionState != ConnectionState.done) {
-          return Text(
-            'loading',
-            textDirection: TextDirection.ltr,
+          return CircularProgressIndicator(
+            semanticsLabel: 'Circular progress indicator',
           );
         }
 
