@@ -13,7 +13,7 @@ Investment _$InvestmentFromJson(Map<String, dynamic> json) => Investment(
       endDate: json['endDate'] == null
           ? null
           : DateTime.parse(json['endDate'] as String),
-      value: json['value'] as String,
+      price: json['price'] as String,
       index: json['index'] as String,
       returnRate: json['returnRate'] as String,
     );
@@ -24,7 +24,7 @@ Map<String, dynamic> _$InvestmentToJson(Investment instance) =>
       'product': instance.product,
       'startDate': instance.startDate.toIso8601String(),
       'endDate': instance.endDate?.toIso8601String(),
-      'value': instance.value,
+      'price': instance.price,
       'index': instance.index,
       'returnRate': instance.returnRate,
     };
