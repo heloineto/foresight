@@ -10,7 +10,6 @@ import 'package:foresight/investments/investments_form/return_rate_field.dart';
 import 'package:foresight/investments/investments_form/vesting_date_field.dart';
 import 'package:foresight/settings/firestore.dart';
 import 'package:foresight/settings/models.dart';
-import 'package:foresight/shared/form/date_field.dart';
 import 'package:foresight/shared/main_scaffold/main_scaffold.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 
@@ -62,7 +61,7 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
         'bank': bank,
         'startDate': startDate.toString(),
         'endDate': endDate?.toString(),
-        'price': price,
+        'price': price?.replaceAll('.', '').replaceAll(',', '.'),
         'index': index,
         'returnRate': returnRate,
       };

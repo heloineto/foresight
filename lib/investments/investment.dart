@@ -66,7 +66,7 @@ class InvestmentItem extends StatelessWidget {
               ],
             ),
             Text(
-              brlFormatter.format(investment.price),
+              brlFormatter.format(double.parse(investment.price)),
               style: TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
