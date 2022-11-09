@@ -97,17 +97,7 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
 
   @override
   Widget build(BuildContext context) {
-    // Investment? currentInvestment = widget.currentInvestment;
-
-    Investment? currentInvestment = Investment.fromJson({
-      'product': 'CRI',
-      'bank': 'Nubank',
-      'startDate': '2022-11-08 00:00:00.000',
-      'endDate': null,
-      'price': '100.00',
-      'index': 'SELIC',
-      'returnRate': '1.00'
-    });
+    Investment? currentInvestment = widget.currentInvestment;
 
     return Form(
       key: _formKey,
