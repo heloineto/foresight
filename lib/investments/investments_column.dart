@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foresight/investments/investment_item.dart';
-import 'package:foresight/settings/firestore.dart';
-import 'package:foresight/settings/models.dart';
+import 'package:foresight/services/firestore.dart';
+import 'package:foresight/services/models.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 
 class InvestmentsColumn extends StatelessWidget {

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:foresight/investments/investments_form/investments_form.dart';
-import 'package:foresight/settings/models.dart';
+import 'package:foresight/services/firestore.dart';
+import 'package:foresight/services/models.dart';
 import 'package:foresight/utils/convert_date.dart';
 import 'package:intl/intl.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 
 final brlFormatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
-
-void doNothing(_) {}
 
 void onEdit(BuildContext context, Investment investment) {
   Navigator.push(
@@ -22,7 +21,9 @@ void onEdit(BuildContext context, Investment investment) {
   );
 }
 
-void onDelete(BuildContext context, Investment investment) {}
+void onDelete(BuildContext context, Investment investment) {
+  FirestoreService().deleteInvestment(investment);
+}
 
 class InvestmentItem extends StatelessWidget {
   final Investment investment;

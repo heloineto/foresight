@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:foresight/investments/investments_form/bank_field.dart';
 import 'package:foresight/investments/investments_form/index_field.dart';
@@ -8,8 +7,8 @@ import 'package:foresight/investments/investments_form/operation_date_field.dart
 import 'package:foresight/investments/investments_form/product_field.dart';
 import 'package:foresight/investments/investments_form/return_rate_field.dart';
 import 'package:foresight/investments/investments_form/vesting_date_field.dart';
-import 'package:foresight/settings/firestore.dart';
-import 'package:foresight/settings/models.dart';
+import 'package:foresight/services/firestore.dart';
+import 'package:foresight/services/models.dart';
 import 'package:foresight/shared/main_scaffold/main_scaffold.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 

@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:foresight/services/auth.dart';
-import 'package:foresight/settings/models.dart';
+import 'package:foresight/services/models.dart';
 
 class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -35,5 +34,17 @@ class FirestoreService {
     var data = investment.toJson();
 
     return ref.set(data);
+  }
+
+  Future<void> deleteInvestment(Investment investment) async {
+    var user = AuthService().user!;
+
+    var ref = _db
+        .collection('user')
+        .doc(user.uid)
+        .collection('investments')
+        .doc(investment.id);
+
+    return ref.delete();
   }
 }
