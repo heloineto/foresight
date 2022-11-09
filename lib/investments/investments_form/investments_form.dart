@@ -20,18 +20,24 @@ String prettyJson(dynamic json) {
 }
 
 class InvestmentsFormPage extends StatelessWidget {
-  const InvestmentsFormPage({super.key});
+  final Investment? currentInvestment;
+
+  const InvestmentsFormPage({super.key, this.currentInvestment});
 
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
-      body: SafeArea(child: InvestmentsForm()),
+      body: SafeArea(
+        child: InvestmentsForm(currentInvestment: currentInvestment),
+      ),
     );
   }
 }
 
 class InvestmentsForm extends StatefulWidget {
-  const InvestmentsForm({super.key});
+  final Investment? currentInvestment;
+
+  const InvestmentsForm({super.key, this.currentInvestment});
 
   @override
   State<InvestmentsForm> createState() => _InvestmentsFormState();
