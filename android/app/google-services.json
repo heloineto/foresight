@@ -1,54 +1,62 @@
 {
-  "project_info": {
-    "project_number": "646109710642",
-    "project_id": "foresight-investment-tracker",
-    "storage_bucket": "foresight-investment-tracker.appspot.com"
-  },
-  "client": [
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:646109710642:android:680667dee4198667a12f2b",
-        "android_client_info": {
-          "package_name": "com.example.foresight"
-        }
-      },
-      "oauth_client": [
+    "project_info": {
+        "project_number": "646109710642",
+        "project_id": "foresight-investment-tracker",
+        "storage_bucket": "foresight-investment-tracker.appspot.com"
+    },
+    "client": [
         {
-          "client_id": "646109710642-f5oopid5ih8pl0odctfqfj2aqgdv16pc.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.foresight",
-            "certificate_hash": "e634d99933917fba5f42c8a7a81dcaeb366d1bff"
-          }
-        },
-        {
-          "client_id": "646109710642-6t6io3j64ijfs9pn2t9rhfl5u7rsdhut.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAXECzqpIaROO-njW1xnGFQHZ4X9Go_qTc"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "646109710642-6t6io3j64ijfs9pn2t9rhfl5u7rsdhut.apps.googleusercontent.com",
-              "client_type": 3
+            "client_info": {
+                "mobilesdk_app_id": "1:646109710642:android:680667dee4198667a12f2b",
+                "android_client_info": {
+                    "package_name": "com.example.foresight"
+                }
             },
-            {
-              "client_id": "646109710642-a3uo48q9411kt9i4aqmhqoef45ts81uh.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.foresight"
-              }
+            "oauth_client": [
+                {
+                    "client_id": "646109710642-6qso4ufccplug91smgj64u5t0te2fl03.apps.googleusercontent.com",
+                    "client_type": 1,
+                    "android_info": {
+                        "package_name": "com.example.foresight",
+                        "certificate_hash": "40023a3d9db8f7b49bfed692bccaeb5ff854ef3a"
+                    }
+                },
+                {
+                    "client_id": "646109710642-f5oopid5ih8pl0odctfqfj2aqgdv16pc.apps.googleusercontent.com",
+                    "client_type": 1,
+                    "android_info": {
+                        "package_name": "com.example.foresight",
+                        "certificate_hash": "e634d99933917fba5f42c8a7a81dcaeb366d1bff"
+                    }
+                },
+                {
+                    "client_id": "646109710642-6t6io3j64ijfs9pn2t9rhfl5u7rsdhut.apps.googleusercontent.com",
+                    "client_type": 3
+                }
+            ],
+            "api_key": [
+                {
+                    "current_key": "AIzaSyAXECzqpIaROO-njW1xnGFQHZ4X9Go_qTc"
+                }
+            ],
+            "services": {
+                "appinvite_service": {
+                    "other_platform_oauth_client": [
+                        {
+                            "client_id": "646109710642-6t6io3j64ijfs9pn2t9rhfl5u7rsdhut.apps.googleusercontent.com",
+                            "client_type": 3
+                        },
+                        {
+                            "client_id": "646109710642-a3uo48q9411kt9i4aqmhqoef45ts81uh.apps.googleusercontent.com",
+                            "client_type": 2,
+                            "ios_info": {
+                                "bundle_id": "com.example.foresight"
+                            }
+                        }
+                    ]
+                }
             }
-          ]
         }
-      }
-    }
-  ],
-  "configuration_version": "1"
+    ],
+    "configuration_version": "1"
 }
