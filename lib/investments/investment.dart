@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:foresight/settings/models.dart';
 import 'package:foresight/utils/convert_date.dart';
 import 'package:intl/intl.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -10,16 +10,12 @@ final brlFormatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
 
 void doNothing(_) {}
 
-class Investment extends StatelessWidget {
-  final String bankName;
-  final DateTime investmentDate;
-  final double investmentValue;
+class InvestmentItem extends StatelessWidget {
+  final Investment investment;
 
-  const Investment({
+  const InvestmentItem({
     super.key,
-    required this.bankName,
-    required this.investmentDate,
-    required this.investmentValue,
+    required this.investment,
   });
 
   @override
@@ -54,7 +50,7 @@ class Investment extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  bankName,
+                  investment.bank,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -63,14 +59,14 @@ class Investment extends StatelessWidget {
                 ),
                 SizedBox(height: 2),
                 Text(
-                  dateTimeToString(investmentDate),
+                  dateTimeToString(investment.startDate),
                   style:
                       TextStyle(fontSize: 15, color: TW3Colors.slate.shade400),
                 )
               ],
             ),
             Text(
-              brlFormatter.format(investmentValue),
+              brlFormatter.format(investment.price),
               style: TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.bold,

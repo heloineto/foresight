@@ -7,26 +7,16 @@ class Investment {
   final String product;
   final DateTime startDate;
   final DateTime? endDate;
-  final String value;
+  final String price;
   final String index;
   final String returnRate;
-
-  // Investment({
-  //   this.bank = '',
-  //   this.product = '',
-  //   required this.startDate,
-  //   this.endDate,
-  //   this.value = '0',
-  //   this.index = '',
-  //   this.returnRate = '',
-  // });
 
   Investment({
     required this.bank,
     required this.product,
     required this.startDate,
     this.endDate,
-    required this.value,
+    required this.price,
     required this.index,
     required this.returnRate,
   });

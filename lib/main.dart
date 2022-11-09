@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:foresight/enter/enter.dart';
 import 'package:foresight/firebase_options.dart';
 import 'package:foresight/routes.dart';
-import 'package:foresight/services/auth.dart';
 import 'package:foresight/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 

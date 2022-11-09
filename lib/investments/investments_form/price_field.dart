@@ -19,10 +19,10 @@ class CurrencyInputFormatter extends TextInputFormatter {
   }
 }
 
-class InvestmentValueField extends StatelessWidget {
+class PriceField extends StatelessWidget {
   final void Function(String?)? onSaved;
 
-  const InvestmentValueField({super.key, this.onSaved});
+  const PriceField({super.key, this.onSaved});
 
   @override
   Widget build(BuildContext context) {

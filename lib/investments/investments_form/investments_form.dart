@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:foresight/investments/investments_form/bank_field.dart';
 import 'package:foresight/investments/investments_form/index_field.dart';
-import 'package:foresight/investments/investments_form/investment_value_field.dart';
+import 'package:foresight/investments/investments_form/price_field.dart';
 import 'package:foresight/investments/investments_form/operation_date_field.dart';
 import 'package:foresight/investments/investments_form/product_field.dart';
 import 'package:foresight/investments/investments_form/return_rate_field.dart';
 import 'package:foresight/investments/investments_form/vesting_date_field.dart';
+import 'package:foresight/settings/firestore.dart';
+import 'package:foresight/settings/models.dart';
 import 'package:foresight/shared/form/date_field.dart';
 import 'package:foresight/shared/main_scaffold/main_scaffold.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
@@ -42,7 +44,7 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
   String? bank;
   DateTime? startDate;
   DateTime? endDate;
-  String? investmentValue;
+  String? price;
   String? index;
   String? returnRate;
 
@@ -52,19 +54,34 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
     var formState = _formKey.currentState!;
 
     if (formState.validate()) {
+      // if (true) {
       formState.save();
 
       var investment = {
         'product': product,
         'bank': bank,
         'startDate': startDate.toString(),
-        'endDate': endDate.toString(),
-        'investmentValue': investmentValue,
+        'endDate': endDate?.toString(),
+        'price': price,
         'index': index,
         'returnRate': returnRate,
       };
 
+      // var investment = {
+      //   'product': 'CRI',
+      //   'bank': 'Nubank',
+      //   'startDate': '2022-11-08 00:00:00.000',
+      //   'endDate': null,
+      //   'value': '100,00',
+      //   'index': 'SELIC',
+      //   'returnRate': '100,00'
+      // };
+
       json = prettyJson(investment);
+
+      debugPrint(json);
+
+      FirestoreService().setInvestment(Investment.fromJson(investment));
     }
   }
 
@@ -100,10 +117,10 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
                   onSaved: (value) => setState(() => endDate = value),
                 ),
                 Divider(height: 40),
-                InvestmentValueField(
+                PriceField(
                   onSaved: (value) {
                     if (value == null) return;
-                    investmentValue = value.substring(3);
+                    price = value.substring(3);
                   },
                 ),
                 SizedBox(height: 20),
