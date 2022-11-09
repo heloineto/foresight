@@ -1,61 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:foresight/investments/investment.dart';
+import 'package:foresight/investments/investment_item.dart';
+import 'package:foresight/services/firestore.dart';
+import 'package:foresight/services/models.dart';
+import 'package:foresight/shared/snapshot_states/empty_state.dart';
+import 'package:foresight/shared/snapshot_states/error_state.dart';
+import 'package:provider/provider.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 
-// ! Perguntar para o professor
-// class Investment {
-//   final String bank;
-//   final DateTime date;
-//   final int value;
-
-//   Investment(this.bank, this.date, this.value);
-// }
-
-//   final List<Investment> _investments = [
-//     {'bank': 'Nubank', 'date': DateTime.utc(2022, 04, 9), 'value': 22.5},
-//     {'bank': 'BB', 'date': DateTime.utc(2022, 02, 9), 'value': 220.75},
-//     {'bank': 'Itaú', 'date': DateTime.utc(2022, 24, 8), 'value': 300.0},
-//     {'bank': 'Itaú', 'date': DateTime.utc(2022, 24, 8), 'value': 300.0},
-//     {'bank': 'Itaú', 'date': DateTime.utc(2022, 24, 8), 'value': 300.0},
-//     {'bank': 'Itaú', 'date': DateTime.utc(2022, 24, 8), 'value': 300.0},
-//   ];
-
 class InvestmentsColumn extends StatelessWidget {
-  InvestmentsColumn({super.key});
-
-  final List<Map<String, Object>> investments = [
-    {'bank': 'Nubank', 'date': DateTime.utc(2022, 04, 9), 'value': 22.5},
-    {'bank': 'BB', 'date': DateTime.utc(2022, 02, 9), 'value': 220.75},
-    {'bank': 'Itaú', 'date': DateTime.utc(2022, 24, 8), 'value': 300.0},
-    {'bank': 'Itaú', 'date': DateTime.utc(2022, 24, 8), 'value': 300.0},
-    {'bank': 'Itaú', 'date': DateTime.utc(2022, 24, 8), 'value': 300.0},
-    {'bank': 'Itaú', 'date': DateTime.utc(2022, 24, 8), 'value': 300.0},
-  ];
+  const InvestmentsColumn({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var investments = Provider.of<List<Investment>>(context);
+
     return Expanded(
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            for (var i = 0; i < investments.length; i++)
-              Column(
-                children: <Widget>[
-                  if (i > 0)
-                    Divider(
-                      color: TW3Colors.slate.shade200,
-                      thickness: 1,
-                      height: 1,
-                    ),
-                  Investment(
-                    bankName: investments[i]['bank'] as String,
-                    investmentDate: investments[i]['date'] as DateTime,
-                    investmentValue: investments[i]['value'] as double,
-                  ),
-                ],
+        child: investments.isEmpty
+            ? Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: EmptyState(text: 'Você ainda não tem investimentos'),
+              )
+            : Column(
+                children: investments.asMap().entries.map((entry) {
+                  int index = entry.key;
+                  var investment = entry.value;
+
+                  return Column(
+                    children: <Widget>[
+                      if (index > 0)
+                        Divider(
+                          color: TW3Colors.slate.shade200,
+                          thickness: 1,
+                          height: 1,
+                        ),
+                      InvestmentItem(investment: investment),
+                    ],
+                  );
+                }).toList(),
               ),
-          ],
-        ),
       ),
     );
   }

@@ -1,6 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:foresight/investments/investments_form/investments_form.dart';
+import 'package:foresight/services/firestore.dart';
+import 'package:foresight/services/models.dart';
 import 'package:foresight/utils/convert_date.dart';
 import 'package:intl/intl.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -8,18 +10,27 @@ import 'package:tailwind_colors/tailwind_colors.dart';
 
 final brlFormatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
 
-void doNothing(_) {}
+void onEdit(BuildContext context, Investment investment) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (BuildContext context) => InvestmentsFormPage(
+        currentInvestment: investment,
+      ),
+    ),
+  );
+}
 
-class Investment extends StatelessWidget {
-  final String bankName;
-  final DateTime investmentDate;
-  final double investmentValue;
+void onDelete(BuildContext context, Investment investment) {
+  FirestoreService().deleteInvestment(investment);
+}
 
-  const Investment({
+class InvestmentItem extends StatelessWidget {
+  final Investment investment;
+
+  const InvestmentItem({
     super.key,
-    required this.bankName,
-    required this.investmentDate,
-    required this.investmentValue,
+    required this.investment,
   });
 
   @override
@@ -29,14 +40,14 @@ class Investment extends StatelessWidget {
         motion: ScrollMotion(),
         children: [
           SlidableAction(
-            onPressed: doNothing,
+            onPressed: (context) => onEdit(context, investment),
             backgroundColor: TW3Colors.indigo.shade400,
             foregroundColor: Colors.white,
             icon: PhosphorIcons.pencilSimpleFill,
             label: 'Editar',
           ),
           SlidableAction(
-            onPressed: doNothing,
+            onPressed: (context) => onDelete(context, investment),
             backgroundColor: TW3Colors.red.shade400,
             foregroundColor: Colors.white,
             icon: PhosphorIcons.trashFill,
@@ -54,7 +65,7 @@ class Investment extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  bankName,
+                  investment.bank,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -63,14 +74,16 @@ class Investment extends StatelessWidget {
                 ),
                 SizedBox(height: 2),
                 Text(
-                  dateTimeToString(investmentDate),
-                  style:
-                      TextStyle(fontSize: 15, color: TW3Colors.slate.shade400),
+                  dateTimeToString(investment.startDate),
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: TW3Colors.slate.shade400,
+                  ),
                 )
               ],
             ),
             Text(
-              brlFormatter.format(investmentValue),
+              brlFormatter.format(double.parse(investment.price)),
               style: TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
@@ -81,9 +94,5 @@ class Investment extends StatelessWidget {
         ),
       ),
     );
-
-    // return Slidable(
-    //   child:
-    // );
   }
 }

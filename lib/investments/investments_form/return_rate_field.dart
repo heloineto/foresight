@@ -34,8 +34,9 @@ class PercentageInputFormatter extends TextInputFormatter {
 
 class ReturnRateField extends StatelessWidget {
   final void Function(String?)? onSaved;
+  final String? initialValue;
 
-  const ReturnRateField({super.key, this.onSaved});
+  const ReturnRateField({super.key, this.onSaved, this.initialValue});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,9 @@ class ReturnRateField extends StatelessWidget {
         hintText: 'Rentabilidade',
         label: Text('Rentabilidade'),
       ),
-      initialValue: formatPercentage(0),
+      initialValue: formatPercentage(
+        initialValue != null ? double.parse(initialValue!) : 0,
+      ),
       validator: (String? value) {
         if (value == null || value.isEmpty) {
           return 'Por favor, insira uma rentabilidade';

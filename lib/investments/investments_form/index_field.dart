@@ -12,8 +12,9 @@ const List<String> indexes = [
 
 class IndexField extends StatelessWidget {
   final void Function(String?)? onSaved;
+  final String? initialValue;
 
-  const IndexField({super.key, this.onSaved});
+  const IndexField({super.key, this.onSaved, this.initialValue});
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +34,7 @@ class IndexField extends StatelessWidget {
 
         return null;
       },
+      value: initialValue,
       onSaved: onSaved,
     );
   }
