@@ -6,8 +6,9 @@ const List<String> banks = <String>[
 
 class BankField extends StatelessWidget {
   final void Function(String?)? onSaved;
+  final String? initialValue;
 
-  const BankField({super.key, this.onSaved});
+  const BankField({super.key, this.onSaved, this.initialValue});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,7 @@ class BankField extends StatelessWidget {
         }
         return null;
       },
+      initialValue: initialValue,
       onSaved: onSaved,
     );
   }

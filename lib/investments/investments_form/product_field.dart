@@ -15,8 +15,9 @@ const List<String> products = [
 
 class ProductField extends StatelessWidget {
   final void Function(String?)? onSaved;
+  final String? initialValue;
 
-  const ProductField({super.key, this.onSaved});
+  const ProductField({super.key, this.onSaved, this.initialValue});
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +37,7 @@ class ProductField extends StatelessWidget {
 
         return null;
       },
+      value: initialValue,
       onSaved: onSaved,
     );
   }
