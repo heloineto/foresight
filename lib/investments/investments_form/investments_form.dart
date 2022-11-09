@@ -43,8 +43,23 @@ class InvestmentsForm extends StatefulWidget {
   State<InvestmentsForm> createState() => _InvestmentsFormState();
 }
 
+String? formatPrice(String? rawPrice) {
+  return rawPrice?.replaceAll('.', '').replaceAll(',', '.');
+}
+
+String? formatReturnRate(String? rawReturnRate) {
+  if (rawReturnRate == null) return null;
+
+  double number =
+      double.parse(rawReturnRate.replaceAll('.', '').replaceAll(',', '.')) /
+          100;
+
+  return number.toString();
+}
+
 class _InvestmentsFormState extends State<InvestmentsForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   String? product;
   String? bank;
   DateTime? startDate;
@@ -67,9 +82,9 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
         'bank': bank,
         'startDate': startDate.toString(),
         'endDate': endDate?.toString(),
-        'price': price?.replaceAll('.', '').replaceAll(',', '.'),
+        'price': formatPrice(price),
         'index': index,
-        'returnRate': returnRate,
+        'returnRate': formatReturnRate(returnRate),
       };
 
       // var investment = {
@@ -102,27 +117,34 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'Criar Investimento',
+                  widget.currentInvestment == null
+                      ? 'Criar Investimento'
+                      : 'Editar Investimento',
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 20),
                 ProductField(
+                  initialValue: widget.currentInvestment?.product,
                   onSaved: (value) => setState(() => product = value),
                 ),
-                Divider(height: 40),
+                Divider(height: 40, color: TW3Colors.slate.shade500),
                 BankField(
+                  initialValue: widget.currentInvestment?.bank,
                   onSaved: (value) => setState(() => bank = value),
                 ),
                 SizedBox(height: 20),
                 OperationDateField(
+                  initialValue: widget.currentInvestment?.startDate,
                   onSaved: (value) => setState(() => startDate = value),
                 ),
                 SizedBox(height: 20),
                 VestingDateField(
+                  initialValue: widget.currentInvestment?.endDate,
                   onSaved: (value) => setState(() => endDate = value),
                 ),
-                Divider(height: 40),
+                Divider(height: 40, color: TW3Colors.slate.shade500),
                 PriceField(
+                  initialValue: widget.currentInvestment?.price,
                   onSaved: (value) {
                     if (value == null) return;
                     price = value.substring(3);
@@ -134,6 +156,7 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
                 ),
                 SizedBox(height: 20),
                 ReturnRateField(
+                  initialValue: widget.currentInvestment?.returnRate,
                   onSaved: (value) => setState(() {
                     if (value == null) return;
                     returnRate = value.substring(2);

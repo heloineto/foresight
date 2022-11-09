@@ -3,8 +3,9 @@ import 'package:foresight/shared/form/date_field.dart';
 
 class OperationDateField extends StatelessWidget {
   final void Function(DateTime?)? onSaved;
+  final DateTime? initialValue;
 
-  const OperationDateField({super.key, this.onSaved});
+  const OperationDateField({super.key, this.onSaved, this.initialValue});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,7 @@ class OperationDateField extends StatelessWidget {
 
         return null;
       },
+      initialValue: initialValue,
       onSaved: onSaved,
     );
   }

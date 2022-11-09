@@ -8,6 +8,7 @@ class DateField extends StatelessWidget {
   final String? hintText;
   final void Function(DateTime?)? onSaved;
   final String? Function(DateTime?)? validator;
+  final DateTime? initialValue;
 
   DateField({
     super.key,
@@ -15,6 +16,7 @@ class DateField extends StatelessWidget {
     this.hintText,
     this.onSaved,
     this.validator,
+    this.initialValue,
   });
 
   @override
@@ -37,6 +39,7 @@ class DateField extends StatelessWidget {
         return date;
       },
       validator: validator,
+      initialValue: initialValue,
       onSaved: onSaved,
     );
   }

@@ -6,6 +6,7 @@ class DropdownField extends StatelessWidget {
   final String? Function(String?)? validator;
   final Widget? label;
   final String? hintText;
+  final String? value;
 
   const DropdownField({
     super.key,
@@ -14,6 +15,7 @@ class DropdownField extends StatelessWidget {
     this.validator,
     this.label,
     this.hintText,
+    this.value,
   });
 
   @override
@@ -24,6 +26,7 @@ class DropdownField extends StatelessWidget {
         hintText: hintText,
         label: label,
       ),
+      value: value,
       items: items,
       onChanged: (_) {},
       validator: validator,
