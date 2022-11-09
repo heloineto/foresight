@@ -7,10 +7,11 @@ class InvestmentPageRouteArguments {
   final double rentabilityRate;
 
   InvestmentPageRouteArguments({
-    required this.bankName, required this.investmentDate, 
-    required this.investmentValue, required this.product,
-    required this.indexer, required this.rentabilityRate,
-  }) {
-    print(this.bankName);
-  }
+    required this.bankName,
+    required this.investmentDate,
+    required this.investmentValue,
+    required this.product,
+    required this.indexer,
+    required this.rentabilityRate,
+  });
 }

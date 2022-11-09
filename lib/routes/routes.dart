@@ -4,6 +4,7 @@ import 'package:foresight/investments/investment_page.dart';
 import 'package:foresight/investments/investments_form/investments_form.dart';
 import 'package:foresight/investments/investments_page.dart';
 import 'package:foresight/routes/investment_page_route_arguments.dart';
+import 'package:foresight/services/models.dart';
 import 'package:foresight/settings/settings.dart';
 
 Map<String, StatelessWidget Function(dynamic)> routes = {
@@ -11,17 +12,9 @@ Map<String, StatelessWidget Function(dynamic)> routes = {
   '/investments': (context) => const InvestmentsPage(),
   '/investments/create': (context) => const InvestmentsFormPage(),
   '/investment': (context) {
-    final arguments = ModalRoute.of(context)!.settings.arguments
-        as InvestmentPageRouteArguments;
+    final investment = ModalRoute.of(context)!.settings.arguments as Investment;
 
-    return InvestmentPage(
-      bankName: arguments.bankName,
-      investmentDate: arguments.investmentDate,
-      investmentValue: arguments.investmentValue,
-      product: arguments.product,
-      indexer: arguments.indexer,
-      rentabilityRate: arguments.rentabilityRate,
-    );
+    return InvestmentPage(investment: investment);
   },
   '/settings': (context, {arguments}) => const SettingsPage(),
 };

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:foresight/routes/investment_page_route_arguments.dart';
 import 'package:foresight/investments/investments_form/investments_form.dart';
 import 'package:foresight/services/firestore.dart';
 import 'package:foresight/services/models.dart';
@@ -40,13 +39,7 @@ class InvestmentItem extends StatelessWidget {
       onTap: () => Navigator.pushNamed(
         context,
         '/investment',
-        // arguments: InvestmentPageRouteArguments(
-        //     bankName: bankName,
-        //     product: product,
-        //     indexer: indexer,
-        //     rentabilityRate: rentabilityRate,
-        //     investmentDate: investmentDate,
-        //     investmentValue: investmentValue),
+        arguments: investment,
       ),
       child: Slidable(
         endActionPane: ActionPane(

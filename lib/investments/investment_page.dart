@@ -2,29 +2,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:foresight/services/models.dart';
 import 'package:foresight/shared/main_scaffold/main_scaffold.dart';
 import 'package:foresight/utils/convert_date.dart';
 import 'package:intl/intl.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 
 final brlFormatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
+final percentageFormatter = NumberFormat.decimalPercentPattern(
+  decimalDigits: 2,
+  locale: 'pt_BR',
+);
 
 class InvestmentPage extends StatelessWidget {
-  final String bankName;
-  final DateTime investmentDate;
-  final double investmentValue;
-  final String product;
-  final String indexer;
-  final double rentabilityRate;
+  final Investment investment;
 
   const InvestmentPage({
     super.key,
-    required this.bankName,
-    required this.investmentDate,
-    required this.investmentValue,
-    required this.product,
-    required this.indexer,
-    required this.rentabilityRate,
+    required this.investment,
   });
 
   @override
@@ -49,11 +44,12 @@ class InvestmentPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 15, bottom: 40),
               child: Text(
-                brlFormatter.format(investmentValue),
+                brlFormatter.format(double.parse(investment.price)),
                 style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.normal,
-                    color: TW3Colors.slate.shade700),
+                  fontSize: 40,
+                  fontWeight: FontWeight.normal,
+                  color: TW3Colors.slate.shade700,
+                ),
               ),
             ),
             Padding(
@@ -62,7 +58,7 @@ class InvestmentPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    bankName,
+                    investment.bank,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.normal,
@@ -70,7 +66,7 @@ class InvestmentPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    dateTimeToString(investmentDate),
+                    dateTimeToString(investment.startDate),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.normal,
@@ -94,7 +90,9 @@ class InvestmentPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '$rentabilityRate%',
+                    percentageFormatter.format(
+                      double.parse(investment.returnRate),
+                    ),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.normal,
@@ -118,7 +116,7 @@ class InvestmentPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    product,
+                    investment.product,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.normal,
@@ -142,7 +140,7 @@ class InvestmentPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    indexer,
+                    investment.index,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.normal,
