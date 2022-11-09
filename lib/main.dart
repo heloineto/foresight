@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:foresight/firebase_options.dart';
 import 'package:foresight/routes.dart';
+import 'package:foresight/shared/snapshot_states/error_state.dart';
 import 'package:foresight/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -27,9 +28,9 @@ class _AppState extends State<App> {
       future: _initialization,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Text(
-            'error',
-            textDirection: TextDirection.ltr,
+          return Padding(
+            padding: const EdgeInsets.only(top: 16),
+            child: ErrorState(text: 'Erro ao conectar com o servidor'),
           );
         }
 

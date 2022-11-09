@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:foresight/investments/investment_item.dart';
 import 'package:foresight/services/firestore.dart';
 import 'package:foresight/services/models.dart';
+import 'package:foresight/shared/snapshot_states/empty_state.dart';
+import 'package:foresight/shared/snapshot_states/error_state.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 
 class InvestmentsColumn extends StatelessWidget {
@@ -19,11 +21,17 @@ class InvestmentsColumn extends StatelessWidget {
               }
 
               if (snapshot.hasError) {
-                return Text('error');
+                return Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: ErrorState(),
+                );
               }
 
-              if (!snapshot.hasData) {
-                return Text('empty');
+              if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: EmptyState(text: 'Você ainda não tem investimentos'),
+                );
               }
 
               List<Investment> investments = snapshot.data!;

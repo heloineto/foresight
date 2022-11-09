@@ -17,8 +17,10 @@ class HomeContainer extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 44)),
         Container(
           margin: EdgeInsets.only(top: 10, right: 30, bottom: 30, left: 30),
-          child: Text('Seu dinheiro já rendeu R\$ 25,00 esse mês.',
-              style: TextStyle(fontSize: 14)),
+          child: Text(
+            'Seu dinheiro já rendeu R\$ 25,00 esse mês.',
+            style: TextStyle(fontSize: 14),
+          ),
         ),
       ]),
     );

@@ -4,6 +4,7 @@ import 'package:foresight/home/home_container.dart';
 import 'package:foresight/investments/investments.dart';
 import 'package:foresight/services/auth.dart';
 import 'package:foresight/shared/main_scaffold/main_scaffold.dart';
+import 'package:foresight/shared/snapshot_states/error_state.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 
 class HomePage extends StatelessWidget {
@@ -19,7 +20,10 @@ class HomePage extends StatelessWidget {
         }
 
         if (snapshot.hasError) {
-          return const Text('auth error');
+          return const Padding(
+            padding: EdgeInsets.only(top: 16),
+            child: ErrorState(text: 'Erro ao autenticar'),
+          );
         }
 
         if (!snapshot.hasData) {
