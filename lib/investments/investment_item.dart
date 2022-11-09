@@ -35,62 +35,69 @@ class InvestmentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Slidable(
-      endActionPane: ActionPane(
-        motion: ScrollMotion(),
-        children: [
-          SlidableAction(
-            onPressed: (context) => onEdit(context, investment),
-            backgroundColor: TW3Colors.indigo.shade400,
-            foregroundColor: Colors.white,
-            icon: PhosphorIcons.pencilSimpleFill,
-            label: 'Editar',
-          ),
-          SlidableAction(
-            onPressed: (context) => onDelete(context, investment),
-            backgroundColor: TW3Colors.red.shade400,
-            foregroundColor: Colors.white,
-            icon: PhosphorIcons.trashFill,
-            label: 'Deletar',
-          ),
-        ],
+    return InkWell(
+      onTap: () => Navigator.pushNamed(
+        context,
+        '/investment',
+        arguments: investment,
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  investment.bank,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: TW3Colors.slate.shade800,
-                  ),
-                ),
-                SizedBox(height: 2),
-                Text(
-                  dateTimeToString(investment.startDate),
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: TW3Colors.slate.shade400,
-                  ),
-                )
-              ],
+      child: Slidable(
+        endActionPane: ActionPane(
+          motion: ScrollMotion(),
+          children: [
+            SlidableAction(
+              onPressed: (context) => onEdit(context, investment),
+              backgroundColor: TW3Colors.indigo.shade400,
+              foregroundColor: Colors.white,
+              icon: PhosphorIcons.pencilSimpleFill,
+              label: 'Editar',
             ),
-            Text(
-              brlFormatter.format(double.parse(investment.price)),
-              style: TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
-                color: TW3Colors.slate.shade800,
-              ),
+            SlidableAction(
+              onPressed: (context) => onDelete(context, investment),
+              backgroundColor: TW3Colors.red.shade400,
+              foregroundColor: Colors.white,
+              icon: PhosphorIcons.trashFill,
+              label: 'Deletar',
             ),
           ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    investment.bank,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: TW3Colors.slate.shade800,
+                    ),
+                  ),
+                  SizedBox(height: 2),
+                  Text(
+                    dateTimeToString(investment.startDate),
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: TW3Colors.slate.shade400,
+                    ),
+                  )
+                ],
+              ),
+              Text(
+                brlFormatter.format(double.parse(investment.price)),
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                  color: TW3Colors.slate.shade800,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
