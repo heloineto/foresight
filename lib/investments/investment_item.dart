@@ -75,8 +75,10 @@ class InvestmentItem extends StatelessWidget {
                 SizedBox(height: 2),
                 Text(
                   dateTimeToString(investment.startDate),
-                  style:
-                      TextStyle(fontSize: 15, color: TW3Colors.slate.shade400),
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: TW3Colors.slate.shade400,
+                  ),
                 )
               ],
             ),

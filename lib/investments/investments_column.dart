@@ -4,6 +4,7 @@ import 'package:foresight/services/firestore.dart';
 import 'package:foresight/services/models.dart';
 import 'package:foresight/shared/snapshot_states/empty_state.dart';
 import 'package:foresight/shared/snapshot_states/error_state.dart';
+import 'package:provider/provider.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 
 class InvestmentsColumn extends StatelessWidget {
@@ -11,32 +12,16 @@ class InvestmentsColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var investments = Provider.of<List<Investment>>(context);
+
     return Expanded(
       child: SingleChildScrollView(
-        child: FutureBuilder<List<Investment>>(
-            future: FirestoreService().getInvestments(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Text('waiting');
-              }
-
-              if (snapshot.hasError) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: ErrorState(),
-                );
-              }
-
-              if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: EmptyState(text: 'Você ainda não tem investimentos'),
-                );
-              }
-
-              List<Investment> investments = snapshot.data!;
-
-              return Column(
+        child: investments.isEmpty
+            ? Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: EmptyState(text: 'Você ainda não tem investimentos'),
+              )
+            : Column(
                 children: investments.asMap().entries.map((entry) {
                   int index = entry.key;
                   var investment = entry.value;
@@ -53,8 +38,7 @@ class InvestmentsColumn extends StatelessWidget {
                     ],
                   );
                 }).toList(),
-              );
-            }),
+              ),
       ),
     );
   }
