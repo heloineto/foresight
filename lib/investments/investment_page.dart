@@ -38,7 +38,7 @@ class InvestmentPage extends StatelessWidget {
             child: Text(
               'Investimento',
               style: TextStyle(
-                fontSize: 65,
+                fontSize: 45,
                 fontWeight: FontWeight.bold,
                 color: TW3Colors.slate.shade700,
               ),
@@ -54,7 +54,7 @@ class InvestmentPage extends StatelessWidget {
             child: Text(
               brlFormatter.format(investmentValue),
               style: TextStyle(
-                fontSize: 55,
+                fontSize: 40,
                 fontWeight: FontWeight.normal,
                 color: TW3Colors.slate.shade700
               ),
@@ -73,7 +73,7 @@ class InvestmentPage extends StatelessWidget {
                 Text(
                   bankName,
                   style: TextStyle(
-                    fontSize: 27,
+                    fontSize: 20,
                     fontWeight: FontWeight.normal,
                     color: TW3Colors.slate.shade800,
                   ),
@@ -81,7 +81,7 @@ class InvestmentPage extends StatelessWidget {
                 Text(
                   dateTimeToString(investmentDate),
                   style: TextStyle(
-                    fontSize: 27,
+                    fontSize: 20,
                     fontWeight: FontWeight.normal,
                     color: TW3Colors.slate.shade800,
                   ),
@@ -102,7 +102,7 @@ class InvestmentPage extends StatelessWidget {
                 Text(
                   'Rentabilidade',
                   style: TextStyle(
-                    fontSize: 27,
+                    fontSize: 20,
                     fontWeight: FontWeight.normal,
                     color: TW3Colors.slate.shade800,
                   ),
@@ -110,7 +110,7 @@ class InvestmentPage extends StatelessWidget {
                 Text(
                   '$rentabilityRate%',
                   style: TextStyle(
-                    fontSize: 27,
+                    fontSize: 20,
                     fontWeight: FontWeight.normal,
                     color: TW3Colors.slate.shade800,
                   ),
@@ -131,7 +131,7 @@ class InvestmentPage extends StatelessWidget {
                 Text(
                   'Produto',
                   style: TextStyle(
-                    fontSize: 27,
+                    fontSize: 20,
                     fontWeight: FontWeight.normal,
                     color: TW3Colors.slate.shade800,
                   ),
@@ -139,7 +139,7 @@ class InvestmentPage extends StatelessWidget {
                 Text(
                   product,
                   style: TextStyle(
-                    fontSize: 27,
+                    fontSize: 20,
                     fontWeight: FontWeight.normal,
                     color: TW3Colors.slate.shade800,
                   ),
@@ -160,7 +160,7 @@ class InvestmentPage extends StatelessWidget {
                 Text(
                   'Indexador',
                   style: TextStyle(
-                    fontSize: 27,
+                    fontSize: 20,
                     fontWeight: FontWeight.normal,
                     color: TW3Colors.slate.shade800,
                   ),
@@ -168,7 +168,7 @@ class InvestmentPage extends StatelessWidget {
                 Text(
                   indexer,
                   style: TextStyle(
-                    fontSize: 27,
+                    fontSize: 20,
                     fontWeight: FontWeight.normal,
                     color: TW3Colors.slate.shade800,
                   ),
