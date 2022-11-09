@@ -24,12 +24,12 @@ class InvestmentsColumn extends StatelessWidget {
   InvestmentsColumn({super.key});
 
   final List<Map<String, Object>> investments = [
-    {'bank': 'Nubank', 'date': DateTime.utc(2022, 04, 9), 'value': 22.5},
-    {'bank': 'BB', 'date': DateTime.utc(2022, 02, 9), 'value': 220.75},
-    {'bank': 'Itaú', 'date': DateTime.utc(2022, 24, 8), 'value': 300.0},
-    {'bank': 'Itaú', 'date': DateTime.utc(2022, 24, 8), 'value': 300.0},
-    {'bank': 'Itaú', 'date': DateTime.utc(2022, 24, 8), 'value': 300.0},
-    {'bank': 'Itaú', 'date': DateTime.utc(2022, 24, 8), 'value': 300.0},
+    {'bank': 'Nubank', 'product': 'C', 'indexer': 'CDI', 'rentabilityRate': 1.2, 'date': DateTime.utc(2022, 04, 9), 'value': 22.5},
+    {'bank': 'BB', 'product': 'C', 'indexer': 'CDI', 'rentabilityRate': 1.2, 'date': DateTime.utc(2022, 02, 9), 'value': 220.75},
+    {'bank': 'Itaú', 'product': 'C', 'indexer': 'CDI', 'rentabilityRate': 1.2, 'date': DateTime.utc(2022, 24, 8), 'value': 300.0},
+    {'bank': 'Itaú', 'product': 'C', 'indexer': 'CDI', 'rentabilityRate': 1.2, 'date': DateTime.utc(2022, 24, 8), 'value': 300.0},
+    {'bank': 'Itaú', 'product': 'C', 'indexer': 'CDI', 'rentabilityRate': 1.2, 'date': DateTime.utc(2022, 24, 8), 'value': 300.0},
+    {'bank': 'Itaú', 'product': 'C', 'indexer': 'CDI', 'rentabilityRate': 1.2, 'date': DateTime.utc(2022, 24, 8), 'value': 300.0},
   ];
 
   @override
@@ -49,8 +49,12 @@ class InvestmentsColumn extends StatelessWidget {
                     ),
                   Investment(
                     bankName: investments[i]['bank'] as String,
-                    investmentDate: investments[i]['date'] as DateTime,
-                    investmentValue: investments[i]['value'] as double,
+                      investmentDate: investments[i]['date'] as DateTime,
+                      investmentValue: investments[i]['value'] as double,
+                      product: investments[i]['product'] as String,
+                      indexer: investments[i]['indexer'] as String,
+                      rentabilityRate:
+                          investments[i]['rentabilityRate'] as double,
                   ),
                 ],
               ),

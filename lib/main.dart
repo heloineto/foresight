@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:foresight/routes.dart';
+import 'package:foresight/routes/routes.dart';
 import 'package:foresight/theme.dart';
 
 Future<void> main() async {
