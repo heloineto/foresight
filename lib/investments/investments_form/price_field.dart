@@ -21,8 +21,9 @@ class CurrencyInputFormatter extends TextInputFormatter {
 
 class PriceField extends StatelessWidget {
   final void Function(String?)? onSaved;
+  final String? initialValue;
 
-  const PriceField({super.key, this.onSaved});
+  const PriceField({super.key, this.onSaved, this.initialValue});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,8 @@ class PriceField extends StatelessWidget {
         hintText: 'Valor investido',
         label: Text('Valor investido'),
       ),
-      initialValue: brlFormatter.format(0),
+      initialValue: brlFormatter
+          .format(initialValue != null ? double.parse(initialValue!) : 0),
       validator: (String? value) {
         if (value == null || value.isEmpty) {
           return 'Por favor, insira um valor investido';

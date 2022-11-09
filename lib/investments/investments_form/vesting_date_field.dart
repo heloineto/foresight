@@ -3,8 +3,9 @@ import 'package:foresight/shared/form/date_field.dart';
 
 class VestingDateField extends StatelessWidget {
   final void Function(DateTime?)? onSaved;
+  final DateTime? initialValue;
 
-  const VestingDateField({super.key, this.onSaved});
+  const VestingDateField({super.key, this.onSaved, this.initialValue});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,7 @@ class VestingDateField extends StatelessWidget {
           )
         ],
       ),
+      initialValue: initialValue,
       onSaved: onSaved,
     );
   }

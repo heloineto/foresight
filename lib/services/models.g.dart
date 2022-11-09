@@ -7,6 +7,7 @@ part of 'models.dart';
 // **************************************************************************
 
 Investment _$InvestmentFromJson(Map<String, dynamic> json) => Investment(
+      id: json['id'] as String?,
       bank: json['bank'] as String,
       product: json['product'] as String,
       startDate: DateTime.parse(json['startDate'] as String),
@@ -20,6 +21,7 @@ Investment _$InvestmentFromJson(Map<String, dynamic> json) => Investment(
 
 Map<String, dynamic> _$InvestmentToJson(Investment instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'bank': instance.bank,
       'product': instance.product,
       'startDate': instance.startDate.toIso8601String(),

@@ -3,6 +3,7 @@ part 'models.g.dart';
 
 @JsonSerializable()
 class Investment {
+  final String? id;
   final String bank;
   final String product;
   final DateTime startDate;
@@ -12,6 +13,7 @@ class Investment {
   final String returnRate;
 
   Investment({
+    this.id,
     required this.bank,
     required this.product,
     required this.startDate,
