@@ -14,8 +14,8 @@ class MainScaffold extends StatelessWidget {
 
     return Scaffold(
       body: body,
+      resizeToAvoidBottomInset: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         elevation: 0,
         hoverElevation: 0,
