@@ -18,14 +18,6 @@ class EnterPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Container(
-              //   width: double.maxFinite,
-              //   height: 245,
-              //   decoration: BoxDecoration(
-              //     color: TW3Colors.slate.shade400,
-              //     borderRadius: BorderRadius.all(Radius.circular(7)),
-              //   ),
-              // ),
               Transform.translate(
                 offset: Offset(-7, 22),
                 child: Text(
@@ -38,13 +30,6 @@ class EnterPage extends StatelessWidget {
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: 40),
-              // EnterButton(
-              //   color: Color(0xFF1877F2),
-              //   icon: PhosphorIcons.facebookLogoFill,
-              //   text: 'Continuar com Facebook',
-              //   onPressed: () => {},
-              // ),
-              // SizedBox(height: 15),
               EnterButton(
                 color: TW3Colors.slate.shade500,
                 icon: PhosphorIcons.googleLogoFill,
