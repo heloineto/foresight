@@ -175,7 +175,9 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
                     ),
                     onPressed: onSubmit,
                     child: Text(
-                      'Criar Investimento',
+                      currentInvestment == null
+                          ? 'Criar Investimento'
+                          : 'Editar Investimento',
                       style: TextStyle(fontSize: 18),
                     ),
                   ),
