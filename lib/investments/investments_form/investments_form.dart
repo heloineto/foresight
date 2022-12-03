@@ -73,7 +73,6 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
     var formState = _formKey.currentState!;
 
     if (formState.validate()) {
-      // if (true) {
       formState.save();
 
       var investment = {
@@ -98,16 +97,6 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
   @override
   Widget build(BuildContext context) {
     Investment? currentInvestment = widget.currentInvestment;
-
-    // Investment? currentInvestment = Investment.fromJson({
-    //   'product': 'CRI',
-    //   'bank': 'Nubank',
-    //   'startDate': '2022-11-08 00:00:00.000',
-    //   'endDate': null,
-    //   'price': '100.00',
-    //   'index': 'SELIC',
-    //   'returnRate': '1.00'
-    // });
 
     return Form(
       key: _formKey,
