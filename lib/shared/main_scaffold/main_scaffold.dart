@@ -3,6 +3,7 @@ import 'package:foresight/services/auth.dart';
 import 'package:foresight/shared/main_scaffold/bottom_bar_button.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 class MainScaffold extends StatelessWidget {
   final Widget? body;
@@ -15,19 +16,27 @@ class MainScaffold extends StatelessWidget {
 
     return Scaffold(
       body: body,
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        elevation: 0,
-        hoverElevation: 0,
-        focusElevation: 0,
-        disabledElevation: 0,
-        highlightElevation: 0,
-        onPressed: () {
-          Navigator.pushNamed(context, '/investments/create');
+      floatingActionButton: KeyboardVisibilityBuilder(
+        builder: (context, isKeyboardVisible) {
+          return Container(
+            child: !isKeyboardVisible
+                ? FloatingActionButton(
+                    elevation: 0,
+                    hoverElevation: 0,
+                    focusElevation: 0,
+                    disabledElevation: 0,
+                    highlightElevation: 0,
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/investments/create');
+                    },
+                    backgroundColor: TW3Colors.emerald,
+                    child: const Icon(PhosphorIcons.currencyDollarSimple),
+                  )
+                : SizedBox(),
+          );
         },
-        backgroundColor: TW3Colors.emerald,
-        child: const Icon(PhosphorIcons.currencyDollarSimple),
       ),
       bottomNavigationBar: BottomAppBar(
         elevation: 0,
