@@ -10,9 +10,9 @@ Future<String> convert_currency(double value) async {
   try {
     final currency = await _getCurrency() ?? '';
 
-    final currencyConverted = await _convert_currency_by_api(value, currency);
+    final currencyConverted = await _convertCurrencyByApi(value, currency);
 
-    return currencyConverted;
+    return '$_getCurrencySymbol $currencyConverted';
   } on PlatformException {
     print('Error obtaining current locale');
   }
@@ -36,7 +36,7 @@ Future<String?> _getCurrencySymbol() async {
   return currencySymbol;
 }
 
-Future<String> _convert_currency_by_api(double value, String currency) async {
+Future<String> _convertCurrencyByApi(double value, String currency) async {
   var url = Uri.https(
       'api.apilayer.com',
       '/exchangerates_data/convert',
