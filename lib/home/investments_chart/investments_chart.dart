@@ -1,10 +1,10 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:foresight/home/investments_chart/get_grid_data.dart';
-import 'package:foresight/home/investments_chart/get_line_bars_data.dart';
-import 'package:foresight/home/investments_chart/get_titles_data.dart';
+import 'package:foresight/home/investments_chart/data_getters/get_grid_data.dart';
+import 'package:foresight/home/investments_chart/data_getters/get_line_bars_data.dart';
+import 'package:foresight/home/investments_chart/data_getters/get_titles_data.dart';
+import 'package:foresight/home/investments_chart/month_indicator.dart';
 import 'package:jiffy/jiffy.dart';
-import 'package:tailwind_colors/tailwind_colors.dart';
 
 class InvestmentsChart extends StatefulWidget {
   const InvestmentsChart({super.key});
@@ -70,19 +70,24 @@ class _InvestmentsChartState extends State<InvestmentsChart> {
             FlSpot(14, 0),
           ];
 
-    return LineChart(
-      LineChartData(
-        minX: 0,
-        maxX: 14,
-        minY: 0,
-        maxY: 6,
-        borderData: FlBorderData(show: false),
-        gridData: getGridData(),
-        titlesData: getTitlesData(dateTimes: dateTimes),
-        lineBarsData: getLineBarsData(spots: spots),
-      ),
-      swapAnimationDuration: Duration(milliseconds: 500),
-      swapAnimationCurve: Curves.easeInOut,
+    return Stack(
+      children: [
+        Center(child: MonthIndicator()),
+        LineChart(
+          LineChartData(
+            minX: 0,
+            maxX: 14,
+            minY: 0,
+            maxY: 6,
+            borderData: FlBorderData(show: false),
+            gridData: getGridData(),
+            titlesData: getTitlesData(dateTimes: dateTimes),
+            lineBarsData: getLineBarsData(spots: spots),
+          ),
+          swapAnimationDuration: Duration(milliseconds: 500),
+          swapAnimationCurve: Curves.easeInOut,
+        ),
+      ],
     );
   }
 }
