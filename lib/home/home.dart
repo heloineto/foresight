@@ -6,12 +6,14 @@ import 'package:foresight/services/auth.dart';
 import 'package:foresight/shared/main_scaffold/main_scaffold.dart';
 import 'package:foresight/shared/snapshot_states/error_state.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
+import 'package:foresight/utils/convert_currency.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    convert_currency(12);
     return StreamBuilder(
       stream: AuthService().userStream,
       builder: (context, snapshot) {
