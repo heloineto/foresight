@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:foresight/home/investments_chart/month_indicator.dart';
-import 'package:tailwind_colors/tailwind_colors.dart';
 
-class MonthsIndicator extends StatefulWidget {
-  const MonthsIndicator({super.key});
+class MonthsIndicator extends StatelessWidget {
+  final int selectedIndex;
+  final void Function(int index) onChange;
 
-  @override
-  State<MonthsIndicator> createState() => _MonthsIndicatorState();
-}
-
-class _MonthsIndicatorState extends State<MonthsIndicator> {
-  int selectedIndex = 3;
+  const MonthsIndicator({
+    super.key,
+    required this.selectedIndex,
+    required this.onChange,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,7 @@ class _MonthsIndicatorState extends State<MonthsIndicator> {
           MonthIndicator(
             index: index,
             isSelected: selectedIndex == index,
-            onTap: () => setState(() => selectedIndex = index),
+            onTap: () => onChange(index),
           ),
       ],
     );

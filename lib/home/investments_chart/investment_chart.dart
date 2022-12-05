@@ -4,10 +4,21 @@ import 'package:foresight/home/investments_chart/data_getters/get_grid_data.dart
 import 'package:foresight/home/investments_chart/data_getters/get_line_bars_data.dart';
 import 'package:foresight/home/investments_chart/data_getters/get_titles_data.dart';
 import 'package:foresight/home/investments_chart/months_indicator.dart';
-import 'package:foresight/utils/investments.dart';
+import 'dart:math';
 
 class InvestmentChart extends StatefulWidget {
-  const InvestmentChart({super.key});
+  final List<DateTime> months;
+  final int selectedIndex;
+  final void Function(int) onChangeSelectedIndex;
+  final List<double> prices;
+
+  const InvestmentChart({
+    super.key,
+    required this.months,
+    required this.selectedIndex,
+    required this.onChangeSelectedIndex,
+    required this.prices,
+  });
 
   @override
   State<InvestmentChart> createState() => _InvestmentChartState();
@@ -15,6 +26,8 @@ class InvestmentChart extends StatefulWidget {
 
 class _InvestmentChartState extends State<InvestmentChart> {
   bool _isLoaded = false;
+  double minPrice = 0.0;
+  double maxPrice = 0.0;
 
   @override
   void initState() {
@@ -28,34 +41,41 @@ class _InvestmentChartState extends State<InvestmentChart> {
         });
       },
     );
+
+    minPrice = widget.prices.reduce(min);
+    maxPrice = widget.prices.reduce(max);
+  }
+
+  List<FlSpot> getSpots() {
+    List<FlSpot> spots = [];
+
+    for (int index = 0; index < widget.prices.length; index++) {
+      double price = widget.prices[index];
+
+      spots.add(FlSpot(2 * index + 1, price));
+    }
+
+    return spots;
   }
 
   @override
   Widget build(BuildContext context) {
-    List<DateTime> dateTimes = getSixMonths();
+    double height = maxPrice - minPrice;
+    double minY = minPrice - height * 0.2;
+    double maxY = maxPrice + height * 0.2;
 
     List<FlSpot> spots = _isLoaded
-        ? [
-            FlSpot(0, 2),
-            FlSpot(1, 3),
-            FlSpot(3, 2),
-            FlSpot(5, 3),
-            FlSpot(7, 3),
-            FlSpot(9, 4),
-            FlSpot(11, 4),
-            FlSpot(13, 5),
-            FlSpot(14, 6),
-          ]
+        ? getSpots()
         : [
-            FlSpot(0, 0),
-            FlSpot(1, 0),
-            FlSpot(3, 0),
-            FlSpot(5, 0),
-            FlSpot(7, 0),
-            FlSpot(9, 0),
-            FlSpot(11, 0),
-            FlSpot(13, 0),
-            FlSpot(14, 0),
+            FlSpot(0, minY),
+            FlSpot(1, minY),
+            FlSpot(3, minY),
+            FlSpot(5, minY),
+            FlSpot(7, minY),
+            FlSpot(9, minY),
+            FlSpot(11, minY),
+            FlSpot(13, minY),
+            FlSpot(14, minY),
           ];
 
     return Stack(
@@ -64,17 +84,20 @@ class _InvestmentChartState extends State<InvestmentChart> {
           LineChartData(
             minX: 0,
             maxX: 14,
-            minY: 0,
-            maxY: 6,
+            minY: minY,
+            maxY: maxY,
             borderData: FlBorderData(show: false),
             gridData: getGridData(),
-            titlesData: getTitlesData(dateTimes: dateTimes),
+            titlesData: getTitlesData(dateTimes: widget.months),
             lineBarsData: getLineBarsData(spots: spots),
           ),
           swapAnimationDuration: Duration(milliseconds: 500),
           swapAnimationCurve: Curves.easeInOut,
         ),
-        MonthsIndicator(),
+        MonthsIndicator(
+          selectedIndex: widget.selectedIndex,
+          onChange: widget.onChangeSelectedIndex,
+        ),
       ],
     );
   }
