@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foresight/home/investments_chart/investments_chart.dart';
+import 'package:foresight/home/investments_chart/investment_chart.dart';
 import 'package:foresight/services/models.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -45,7 +45,7 @@ class InvestmentsSummary extends StatelessWidget {
             ],
           ),
         ),
-        Expanded(flex: 3, child: InvestmentsChart()),
+        Expanded(flex: 3, child: InvestmentChart()),
       ]),
     );
   }

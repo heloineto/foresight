@@ -14,8 +14,6 @@ class MonthIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("$index $isSelected");
-
     return Expanded(
       child: InkWell(
         onTap: onTap,

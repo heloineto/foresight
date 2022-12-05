@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:foresight/routes/routes.dart';
+import 'package:foresight/routes.dart';
 import 'package:foresight/firebase_options.dart';
 import 'package:foresight/services/firestore.dart';
 import 'package:foresight/services/models.dart';

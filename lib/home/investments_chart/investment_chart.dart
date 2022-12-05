@@ -3,31 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:foresight/home/investments_chart/data_getters/get_grid_data.dart';
 import 'package:foresight/home/investments_chart/data_getters/get_line_bars_data.dart';
 import 'package:foresight/home/investments_chart/data_getters/get_titles_data.dart';
-import 'package:foresight/home/investments_chart/month_indicator.dart';
 import 'package:foresight/home/investments_chart/months_indicator.dart';
-import 'package:jiffy/jiffy.dart';
+import 'package:foresight/utils/investments.dart';
 
-class InvestmentsChart extends StatefulWidget {
-  const InvestmentsChart({super.key});
+class InvestmentChart extends StatefulWidget {
+  const InvestmentChart({super.key});
 
   @override
-  State<InvestmentsChart> createState() => _InvestmentsChartState();
+  State<InvestmentChart> createState() => _InvestmentChartState();
 }
 
-class _InvestmentsChartState extends State<InvestmentsChart> {
+class _InvestmentChartState extends State<InvestmentChart> {
   bool _isLoaded = false;
-
-  List<Jiffy> getDateTimes() {
-    List<Jiffy> dateTimes = [];
-
-    Jiffy startDate = Jiffy().subtract(months: 3);
-
-    for (int i = 0; i <= 7; i++) {
-      dateTimes.add(Jiffy(startDate).add(months: i));
-    }
-
-    return dateTimes;
-  }
 
   @override
   void initState() {
@@ -45,7 +32,7 @@ class _InvestmentsChartState extends State<InvestmentsChart> {
 
   @override
   Widget build(BuildContext context) {
-    List<Jiffy> dateTimes = getDateTimes();
+    List<DateTime> dateTimes = getSixMonths();
 
     List<FlSpot> spots = _isLoaded
         ? [

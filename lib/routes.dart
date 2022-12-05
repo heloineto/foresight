@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foresight/home/home.dart';
-import 'package:foresight/investments/investment_page.dart';
+import 'package:foresight/investment/investment.dart';
 import 'package:foresight/investments/investments_form/investments_form.dart';
 import 'package:foresight/investments/investments_page.dart';
-import 'package:foresight/routes/investment_page_route_arguments.dart';
 import 'package:foresight/services/models.dart';
 import 'package:foresight/settings/settings.dart';
 

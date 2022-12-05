@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 
-FlTitlesData getTitlesData({required List<Jiffy> dateTimes}) {
+FlTitlesData getTitlesData({required List<DateTime> dateTimes}) {
   return FlTitlesData(
     show: true,
     rightTitles: SideTitles(showTitles: false),
@@ -30,7 +30,7 @@ FlTitlesData getTitlesData({required List<Jiffy> dateTimes}) {
           return '';
         }
 
-        Jiffy jiffy = dateTimes[index];
+        Jiffy jiffy = Jiffy(dateTimes[index]);
 
         return jiffy.format('MMM');
       },
