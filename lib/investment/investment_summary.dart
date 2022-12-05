@@ -15,7 +15,7 @@ class InvestmentSummary extends StatefulWidget {
 
 class _InvestmentSummaryState extends State<InvestmentSummary> {
   int selectedIndex = 3;
-  List<DateTime> months = getNMonths(9);
+  List<DateTime> months = getNMonths(7);
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 
-FlTitlesData getTitlesData({required List<DateTime> dateTimes}) {
+FlTitlesData getTitlesData({required List<DateTime> months}) {
   return FlTitlesData(
     show: true,
     rightTitles: SideTitles(showTitles: false),
@@ -26,11 +26,11 @@ FlTitlesData getTitlesData({required List<DateTime> dateTimes}) {
 
         int index = (intValue - 1) ~/ 2;
 
-        if (!dateTimes.asMap().containsKey(index)) {
+        if (!months.asMap().containsKey(index)) {
           return '';
         }
 
-        Jiffy jiffy = Jiffy(dateTimes[index]);
+        Jiffy jiffy = Jiffy(months[index]);
 
         return jiffy.format('MMM');
       },

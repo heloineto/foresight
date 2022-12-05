@@ -50,13 +50,12 @@ class _InvestmentChartState extends State<InvestmentChart> {
   }
 
   List<FlSpot> getSpots() {
-    // FlSpot(-2, getInvestmentPrice(date: Jiffy(widget.months[0]).subtract(months: 1).dateTime, investment: investment))
     List<FlSpot> spots = [];
 
     for (int index = 0; index < widget.prices.length; index++) {
       double price = widget.prices[index];
 
-      spots.add(FlSpot(2.0 * index, price));
+      spots.add(FlSpot(2.0 * index + 1, price));
     }
 
     return spots;
@@ -92,7 +91,7 @@ class _InvestmentChartState extends State<InvestmentChart> {
             maxY: maxY,
             borderData: FlBorderData(show: false),
             gridData: getGridData(),
-            titlesData: getTitlesData(dateTimes: widget.months),
+            titlesData: getTitlesData(months: widget.months),
             lineBarsData: getLineBarsData(spots: spots),
           ),
           swapAnimationDuration: Duration(milliseconds: 500),
@@ -100,6 +99,7 @@ class _InvestmentChartState extends State<InvestmentChart> {
         ),
         MonthsIndicator(
           selectedIndex: widget.selectedIndex,
+          months: widget.months,
           onChange: widget.onChangeSelectedIndex,
         ),
       ],

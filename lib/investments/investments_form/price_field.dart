@@ -7,7 +7,6 @@ final brlFormatter = NumberFormat.simpleCurrency(locale: 'pt_BR');
 class CurrencyInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(oldValue, newValue) {
-    debugPrint(newValue.text);
     double value = double.parse(newValue.text);
 
     String newText = brlFormatter.format(value / 100);

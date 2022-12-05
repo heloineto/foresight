@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 
 List<LineChartBarData> getLineBarsData({required List<FlSpot> spots}) {
+  print(spots.map((spot) => spot.x));
+
   return [
     LineChartBarData(
       spots: spots,

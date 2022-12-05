@@ -88,8 +88,6 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
 
       json = prettyJson(investment);
 
-      debugPrint(json);
-
       FirestoreService().setInvestment(Investment.fromJson(investment));
     }
   }
