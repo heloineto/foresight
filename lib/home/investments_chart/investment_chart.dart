@@ -73,12 +73,12 @@ class _InvestmentChartState extends State<InvestmentChart> {
         ? [
             FlSpot(
               -1,
-              widget.previousPrice ?? widget.prices.first,
+              (widget.previousPrice ?? widget.prices.first).clamp(minY, maxY),
             ),
             ...getSpots(),
             FlSpot(
               15,
-              widget.nextPrice ?? widget.prices.last,
+              (widget.nextPrice ?? widget.prices.last).clamp(minY, maxY),
             )
           ]
         : [

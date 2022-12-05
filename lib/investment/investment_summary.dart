@@ -22,6 +22,9 @@ class _InvestmentSummaryState extends State<InvestmentSummary> {
   Widget build(BuildContext context) {
     var prices = months.map(
       (month) {
+        print(getInvestmentPrice(date: month, investment: widget.investment));
+        print(month);
+
         return getInvestmentPrice(date: month, investment: widget.investment);
       },
     ).toList();

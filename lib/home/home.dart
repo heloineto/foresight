@@ -46,26 +46,6 @@ class HomePage extends StatelessWidget {
           return EnterPage();
         }
 
-/*
-  {
-     investments: [
-        {
-           name: "NuBank",
-           value: {
-             "01/2022": "100"
-           }
-        }
-     ]
-  }
-
-  "SELIC": {
-    "01/2022": 13,
-    "02/2022": 14,
-    "03/2022": 15,
-    "04/2022": 1620,
-  }
-  
- */
         return MainScaffold(
           body: SafeArea(
             child: Container(

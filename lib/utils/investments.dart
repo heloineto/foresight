@@ -59,10 +59,13 @@ double getInvestmentPrice({
 }) {
   Jiffy goalDate = Jiffy(date);
   Jiffy startDate = Jiffy(investment.startDate);
-  Jiffy? endDate =
-      investment.endDate != null ? Jiffy(investment.endDate) : null;
   double price = double.parse(investment.price);
   double returnRate = double.parse(investment.returnRate);
+
+  if (investment.endDate != null) {
+    Jiffy? endDate = Jiffy(investment.endDate);
+    goalDate = goalDate.isBefore(endDate) ? goalDate : endDate;
+  }
 
   if (isBeforeMonth(goalDate, startDate)) {
     return price;
@@ -70,8 +73,7 @@ double getInvestmentPrice({
 
   Jiffy currentDate = startDate;
 
-  while (isBeforeMonth(currentDate, goalDate) ||
-      (endDate != null && isBeforeMonth(currentDate, endDate))) {
+  while (isBeforeMonth(currentDate, goalDate)) {
     price += price * getIndex(currentDate.dateTime) * returnRate;
 
     currentDate.add(months: 1);
