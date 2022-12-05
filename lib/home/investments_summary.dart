@@ -28,8 +28,10 @@ class InvestmentsSummary extends StatelessWidget {
             children: [
               Container(
                 margin: EdgeInsets.only(top: 15, bottom: 8),
-                child: Text('Seu saldo atual é de:',
-                    style: TextStyle(fontSize: 16)),
+                child: Text(
+                  'Seu saldo atual é de:',
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
               Text(
                 brlFormatter.format(balance),

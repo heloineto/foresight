@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foresight/investments/investment_item.dart';
-import 'package:foresight/services/firestore.dart';
 import 'package:foresight/services/models.dart';
 import 'package:foresight/shared/snapshot_states/empty_state.dart';
-import 'package:foresight/shared/snapshot_states/error_state.dart';
 import 'package:provider/provider.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 
@@ -22,22 +20,24 @@ class InvestmentsColumn extends StatelessWidget {
                 child: EmptyState(text: 'Você ainda não tem investimentos'),
               )
             : Column(
-                children: investments.asMap().entries.map((entry) {
-                  int index = entry.key;
-                  var investment = entry.value;
+                children: investments.asMap().entries.map(
+                  (entry) {
+                    int index = entry.key;
+                    var investment = entry.value;
 
-                  return Column(
-                    children: <Widget>[
-                      if (index > 0)
-                        Divider(
-                          color: TW3Colors.slate.shade200,
-                          thickness: 1,
-                          height: 1,
-                        ),
-                      InvestmentItem(investment: investment),
-                    ],
-                  );
-                }).toList(),
+                    return Column(
+                      children: <Widget>[
+                        if (index > 0)
+                          Divider(
+                            color: TW3Colors.slate.shade200,
+                            thickness: 1,
+                            height: 1,
+                          ),
+                        InvestmentItem(investment: investment),
+                      ],
+                    );
+                  },
+                ).toList(),
               ),
       ),
     );
