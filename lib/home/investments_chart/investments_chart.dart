@@ -4,6 +4,7 @@ import 'package:foresight/home/investments_chart/data_getters/get_grid_data.dart
 import 'package:foresight/home/investments_chart/data_getters/get_line_bars_data.dart';
 import 'package:foresight/home/investments_chart/data_getters/get_titles_data.dart';
 import 'package:foresight/home/investments_chart/month_indicator.dart';
+import 'package:foresight/home/investments_chart/months_indicator.dart';
 import 'package:jiffy/jiffy.dart';
 
 class InvestmentsChart extends StatefulWidget {
@@ -72,7 +73,6 @@ class _InvestmentsChartState extends State<InvestmentsChart> {
 
     return Stack(
       children: [
-        Center(child: MonthIndicator()),
         LineChart(
           LineChartData(
             minX: 0,
@@ -87,6 +87,7 @@ class _InvestmentsChartState extends State<InvestmentsChart> {
           swapAnimationDuration: Duration(milliseconds: 500),
           swapAnimationCurve: Curves.easeInOut,
         ),
+        MonthsIndicator(),
       ],
     );
   }

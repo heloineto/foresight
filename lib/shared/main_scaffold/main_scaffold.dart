@@ -42,7 +42,7 @@ class MainScaffold extends StatelessWidget {
         elevation: 0,
         shape: const CircularNotchedRectangle(),
         notchMargin: 8,
-        color: TW3Colors.slate[300],
+        color: TW3Colors.slate.shade300,
         child: Container(
           height: 60,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),

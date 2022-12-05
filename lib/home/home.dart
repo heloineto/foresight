@@ -16,7 +16,23 @@ class HomePage extends StatelessWidget {
       stream: AuthService().userStream,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return MainScaffold(body: const Text('auth loading'));
+          return MainScaffold(
+            body: SafeArea(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: const [
+                    CircularProgressIndicator(
+                      semanticsLabel: 'Circular progress indicator',
+                    ),
+                    SizedBox(height: 10),
+                    Text('Auth loading'),
+                  ],
+                ),
+              ),
+            ),
+          );
         }
 
         if (snapshot.hasError) {
@@ -30,6 +46,26 @@ class HomePage extends StatelessWidget {
           return EnterPage();
         }
 
+/*
+  {
+     investments: [
+        {
+           name: "NuBank",
+           value: {
+             "01/2022": "100"
+           }
+        }
+     ]
+  }
+
+  "SELIC": {
+    "01/2022": 13,
+    "02/2022": 14,
+    "03/2022": 15,
+    "04/2022": 1620,
+  }
+  
+ */
         return MainScaffold(
           body: SafeArea(
             child: Container(
