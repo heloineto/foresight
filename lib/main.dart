@@ -7,6 +7,7 @@ import 'package:foresight/services/models.dart';
 import 'package:foresight/shared/snapshot_states/error_state.dart';
 import 'package:foresight/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:foresight/utils/convert_currency.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -27,6 +28,7 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    convert_currency(12);
     return FutureBuilder(
       future: _initialization,
       builder: (context, snapshot) {
