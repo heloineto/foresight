@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:devicelocale/devicelocale.dart';
 import 'package:intl/intl.dart';
@@ -37,9 +36,7 @@ Future<String?> _getCurrencySymbol() async {
 }
 
 Future<String> _convertCurrencyByApi(double value, String currency) async {
-  var url = Uri.https(
-      'api.apilayer.com',
-      '/exchangerates_data/convert',
+  var url = Uri.https('api.apilayer.com', '/exchangerates_data/convert',
       {'from': 'BRL', 'to': currency, 'amount': '$value'});
   var response = await http.get(url, headers: {
     'apikey': 'XiEL0zAwWDUWW3ItWslwkCfXEHV3ehtn',
