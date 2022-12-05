@@ -8,7 +8,32 @@ final percentageFormatter = NumberFormat.decimalPercentPattern(
   locale: 'pt_BR',
 );
 
-double index = 0.001;
+var indexes = {
+  '01/2022': 0.00145,
+  '02/2022': 0.00212,
+  '03/2022': 0.00174,
+  '04/2022': 0.00176,
+  '05/2022': 0.00122,
+  '06/2022': 0.00175,
+  '07/2022': 0.00143,
+  '08/2022': 0.00172,
+  '09/2022': 0.00214,
+  '10/2022': 0.00247,
+  '11/2022': 0.00145,
+  '12/2022': 0.00182,
+  '01/2023': 0.00126,
+  '02/2023': 0.00134,
+  '03/2023': 0.00122,
+  '04/2023': 0.00151,
+  '05/2023': 0.00143,
+  '06/2023': 0.00241,
+  '07/2023': 0.00231,
+  '08/2023': 0.00121,
+  '09/2023': 0.00123,
+  '10/2023': 0.00239,
+  '11/2023': 0.00218,
+  '12/2023': 0.00131,
+};
 
 bool isBeforeMonth(Jiffy dateA, Jiffy dateB) {
   if (dateA.year != dateB.year) {
@@ -16,6 +41,16 @@ bool isBeforeMonth(Jiffy dateA, Jiffy dateB) {
   }
 
   return dateA.month < dateB.month;
+}
+
+double getIndex(DateTime date) {
+  var key = Jiffy(date).format('MM/yyyy');
+
+  if (!indexes.containsKey(key)) {
+    return 0.001;
+  }
+
+  return indexes[key]!;
 }
 
 double getInvestmentPrice({
@@ -37,7 +72,7 @@ double getInvestmentPrice({
 
   while (isBeforeMonth(currentDate, goalDate) ||
       (endDate != null && isBeforeMonth(currentDate, endDate))) {
-    price += price * index * returnRate;
+    price += price * getIndex(currentDate.dateTime) * returnRate;
 
     currentDate.add(months: 1);
   }
@@ -45,12 +80,12 @@ double getInvestmentPrice({
   return price;
 }
 
-List<DateTime> getSixMonths() {
+List<DateTime> getNMonths(int count) {
   List<DateTime> dateTimes = [];
 
-  Jiffy startDate = Jiffy().subtract(months: 3);
+  Jiffy startDate = Jiffy().subtract(months: count ~/ 2);
 
-  for (int i = 0; i <= 7; i++) {
+  for (int i = 0; i < count; i++) {
     dateTimes.add(Jiffy(startDate).add(months: i).dateTime);
   }
 

@@ -50,7 +50,7 @@ class InvestmentsSummary extends StatelessWidget {
             flex: 3,
             child: InvestmentChart(
               prices: [1, 2, 3],
-              months: getSixMonths(),
+              months: getNMonths(8),
               onChangeSelectedIndex: (_) => {},
               selectedIndex: 4,
             )),

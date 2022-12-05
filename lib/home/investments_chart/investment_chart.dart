@@ -6,6 +6,9 @@ import 'package:foresight/home/investments_chart/data_getters/get_titles_data.da
 import 'package:foresight/home/investments_chart/months_indicator.dart';
 import 'dart:math';
 
+import 'package:foresight/utils/investments.dart';
+import 'package:jiffy/jiffy.dart';
+
 class InvestmentChart extends StatefulWidget {
   final List<DateTime> months;
   final int selectedIndex;
@@ -47,12 +50,13 @@ class _InvestmentChartState extends State<InvestmentChart> {
   }
 
   List<FlSpot> getSpots() {
+    // FlSpot(-2, getInvestmentPrice(date: Jiffy(widget.months[0]).subtract(months: 1).dateTime, investment: investment))
     List<FlSpot> spots = [];
 
     for (int index = 0; index < widget.prices.length; index++) {
       double price = widget.prices[index];
 
-      spots.add(FlSpot(2 * index + 1, price));
+      spots.add(FlSpot(2.0 * index, price));
     }
 
     return spots;

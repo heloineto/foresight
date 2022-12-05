@@ -14,21 +14,18 @@ class InvestmentSummary extends StatefulWidget {
 }
 
 class _InvestmentSummaryState extends State<InvestmentSummary> {
-  int selectedIndex = 5;
-  List<DateTime> months = getSixMonths();
+  int selectedIndex = 3;
+  List<DateTime> months = getNMonths(9);
 
   @override
   Widget build(BuildContext context) {
-    var prices = months
-        .map(
-          (month) =>
-              getInvestmentPrice(date: month, investment: widget.investment),
-        )
-        .toList();
+    var prices = months.map(
+      (month) {
+        return getInvestmentPrice(date: month, investment: widget.investment);
+      },
+    ).toList();
 
     bool isPast = months[selectedIndex].difference(DateTime.now()).isNegative;
-
-    print(prices);
 
     return Column(
       children: [
