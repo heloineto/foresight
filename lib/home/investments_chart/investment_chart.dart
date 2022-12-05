@@ -5,15 +5,15 @@ import 'package:foresight/home/investments_chart/data_getters/get_line_bars_data
 import 'package:foresight/home/investments_chart/data_getters/get_titles_data.dart';
 import 'package:foresight/home/investments_chart/months_indicator.dart';
 import 'dart:math';
-
 import 'package:foresight/utils/investments.dart';
-import 'package:jiffy/jiffy.dart';
 
 class InvestmentChart extends StatefulWidget {
   final List<DateTime> months;
   final int selectedIndex;
   final void Function(int) onChangeSelectedIndex;
   final List<double> prices;
+  final double? previousPrice;
+  final double? nextPrice;
 
   const InvestmentChart({
     super.key,
@@ -21,6 +21,8 @@ class InvestmentChart extends StatefulWidget {
     required this.selectedIndex,
     required this.onChangeSelectedIndex,
     required this.prices,
+    this.previousPrice,
+    this.nextPrice,
   });
 
   @override
@@ -68,7 +70,17 @@ class _InvestmentChartState extends State<InvestmentChart> {
     double maxY = maxPrice + height * 0.2;
 
     List<FlSpot> spots = _isLoaded
-        ? getSpots()
+        ? [
+            FlSpot(
+              -1,
+              widget.previousPrice ?? widget.prices.first,
+            ),
+            ...getSpots(),
+            FlSpot(
+              15,
+              widget.nextPrice ?? widget.prices.last,
+            )
+          ]
         : [
             FlSpot(0, minY),
             FlSpot(1, minY),

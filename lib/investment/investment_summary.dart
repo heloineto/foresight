@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foresight/home/investments_chart/investment_chart.dart';
 import 'package:foresight/services/models.dart';
 import 'package:foresight/utils/investments.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 
 class InvestmentSummary extends StatefulWidget {
@@ -26,6 +27,16 @@ class _InvestmentSummaryState extends State<InvestmentSummary> {
     ).toList();
 
     bool isPast = months[selectedIndex].difference(DateTime.now()).isNegative;
+
+    double previousPrice = getInvestmentPrice(
+      date: Jiffy(months.first).subtract(months: 1).dateTime,
+      investment: widget.investment,
+    );
+
+    double nextPrice = getInvestmentPrice(
+      date: Jiffy(months.last).add(months: 1).dateTime,
+      investment: widget.investment,
+    );
 
     return Column(
       children: [
@@ -59,6 +70,8 @@ class _InvestmentSummaryState extends State<InvestmentSummary> {
           height: 250,
           child: InvestmentChart(
             prices: prices,
+            previousPrice: previousPrice,
+            nextPrice: nextPrice,
             months: months,
             selectedIndex: selectedIndex,
             onChangeSelectedIndex: (index) {

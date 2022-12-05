@@ -104,12 +104,13 @@ String doubleToBrl(double value) {
   return brlFormatter.format(value);
 }
 
-String getMonthlyRate(List<double> prices, int selectedIndex) {
-  int previousIndex = selectedIndex - 1;
+String getMonthlyRate(List<double> prices, int index) {
+  int previousIndex = index - 1;
 
   if (previousIndex < 0) {
-    return doubleToBrl(0.0);
+    index++;
+    previousIndex++;
   }
 
-  return doubleToBrl(prices[selectedIndex] - prices[selectedIndex - 1]);
+  return doubleToBrl(prices[index] - prices[previousIndex]);
 }
