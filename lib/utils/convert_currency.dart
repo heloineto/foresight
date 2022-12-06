@@ -5,13 +5,13 @@ import 'package:devicelocale/devicelocale.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
-Future<String> convert_currency(double value) async {
+Future<String> convertCurrency(double value) async {
   try {
-    final currency = await _getCurrency() ?? '';
+    final currency = await getCurrency() ?? '';
 
-    final currencyConverted = await _convertCurrencyByApi(value, currency);
+    final currencyConverted = await convertCurrencyByApi(value, currency);
 
-    return '$_getCurrencySymbol $currencyConverted';
+    return '$currency $currencyConverted';
   } on PlatformException {
     print('Error obtaining current locale');
   }
@@ -19,7 +19,7 @@ Future<String> convert_currency(double value) async {
   return '';
 }
 
-Future<String?> _getCurrency() async {
+Future<String?> getCurrency() async {
   final locale = await Devicelocale.currentLocale;
   final format = NumberFormat.simpleCurrency(locale: locale.toString());
   final currency = format.currencyName;
@@ -27,7 +27,7 @@ Future<String?> _getCurrency() async {
   return currency;
 }
 
-Future<String?> _getCurrencySymbol() async {
+Future<String?> getCurrencySymbol() async {
   final locale = await Devicelocale.currentLocale;
   final format = NumberFormat.simpleCurrency(locale: locale.toString());
   final currencySymbol = format.currencySymbol;
@@ -35,9 +35,12 @@ Future<String?> _getCurrencySymbol() async {
   return currencySymbol;
 }
 
-Future<String> _convertCurrencyByApi(double value, String currency) async {
-  var url = Uri.https('api.apilayer.com', '/exchangerates_data/convert',
-      {'from': 'BRL', 'to': currency, 'amount': '$value'});
+Future<String> convertCurrencyByApi(double value, String currency) async {
+  var url = Uri.https('api.apilayer.com', '/exchangerates_data/convert', {
+    'from': 'BRL',
+    'to': currency,
+    'amount': '$value',
+  });
   var response = await http.get(url, headers: {
     'apikey': 'XiEL0zAwWDUWW3ItWslwkCfXEHV3ehtn',
   });

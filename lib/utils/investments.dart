@@ -43,19 +43,35 @@ bool isBeforeMonth(Jiffy dateA, Jiffy dateB) {
   return dateA.month < dateB.month;
 }
 
-double getIndex(DateTime date) {
-  var key = Jiffy(date).format('MM/yyyy');
-
-  if (!indexes.containsKey(key)) {
+double getIndexValue({
+  required DateTime date,
+  required Map<String, dynamic>? indexes,
+  required Investment investment,
+}) {
+  if (indexes == null) {
     return 0.001;
   }
 
-  return indexes[key]!;
+  dynamic index = indexes[investment.index];
+
+  if (index == null) {
+    return 0.001;
+  }
+
+  String key = Jiffy(date).format('MM/yyyy');
+  double? indexValue = index[key];
+
+  if (indexValue == null) {
+    return 0.001;
+  }
+
+  return indexValue;
 }
 
 double getInvestmentPrice({
   required DateTime date,
   required Investment investment,
+  required Map<String, dynamic>? indexes,
 }) {
   Jiffy goalDate = Jiffy(date);
   Jiffy startDate = Jiffy(investment.startDate);
@@ -74,7 +90,13 @@ double getInvestmentPrice({
   Jiffy currentDate = startDate;
 
   while (isBeforeMonth(currentDate, goalDate)) {
-    price += price * getIndex(currentDate.dateTime) * returnRate;
+    var indexValue = getIndexValue(
+      date: currentDate.dateTime,
+      indexes: indexes,
+      investment: investment,
+    );
+
+    price += price * indexValue * returnRate;
 
     currentDate.add(months: 1);
   }

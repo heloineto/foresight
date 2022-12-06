@@ -3,6 +3,7 @@ import 'package:foresight/home/investments_chart/investment_chart.dart';
 import 'package:foresight/services/models.dart';
 import 'package:foresight/utils/investments.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:provider/provider.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 
 class InvestmentSummary extends StatefulWidget {
@@ -20,26 +21,29 @@ class _InvestmentSummaryState extends State<InvestmentSummary> {
 
   @override
   Widget build(BuildContext context) {
+    var indexes = Provider.of<Map<String, dynamic>?>(context);
+
     var prices = months.map(
       (month) {
-        print(getInvestmentPrice(date: month, investment: widget.investment));
-        print(month);
-
-        return getInvestmentPrice(date: month, investment: widget.investment);
+        return getInvestmentPrice(
+          date: month,
+          investment: widget.investment,
+          indexes: indexes,
+        );
       },
     ).toList();
 
     bool isPast = months[selectedIndex].difference(DateTime.now()).isNegative;
 
     double previousPrice = getInvestmentPrice(
-      date: Jiffy(months.first).subtract(months: 1).dateTime,
-      investment: widget.investment,
-    );
+        date: Jiffy(months.first).subtract(months: 1).dateTime,
+        investment: widget.investment,
+        indexes: indexes);
 
     double nextPrice = getInvestmentPrice(
-      date: Jiffy(months.last).add(months: 1).dateTime,
-      investment: widget.investment,
-    );
+        date: Jiffy(months.last).add(months: 1).dateTime,
+        investment: widget.investment,
+        indexes: indexes);
 
     return Column(
       children: [

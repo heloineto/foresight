@@ -22,11 +22,13 @@ class _InvestmentsSummaryState extends State<InvestmentsSummary> {
   double sumMonthPrice({
     required DateTime month,
     required List<Investment> investments,
+    required Map<String, dynamic>? indexes,
   }) {
     double sum = 0;
 
     for (Investment investment in investments) {
-      sum += getInvestmentPrice(date: month, investment: investment);
+      sum += getInvestmentPrice(
+          date: month, investment: investment, indexes: indexes);
     }
 
     return sum;
@@ -34,20 +36,22 @@ class _InvestmentsSummaryState extends State<InvestmentsSummary> {
 
   @override
   Widget build(BuildContext context) {
+    var indexes = Provider.of<Map<String, dynamic>?>(context);
     List<Investment> investments = Provider.of<List<Investment>>(context);
     var prices = months
-        .map((month) => sumMonthPrice(month: month, investments: investments))
+        .map((month) => sumMonthPrice(
+            month: month, investments: investments, indexes: indexes))
         .toList();
 
     double previousPrice = sumMonthPrice(
-      month: Jiffy(months.first).subtract(months: 1).dateTime,
-      investments: investments,
-    );
+        month: Jiffy(months.first).subtract(months: 1).dateTime,
+        investments: investments,
+        indexes: indexes);
 
     double nextPrice = sumMonthPrice(
-      month: Jiffy(months.last).add(months: 1).dateTime,
-      investments: investments,
-    );
+        month: Jiffy(months.last).add(months: 1).dateTime,
+        investments: investments,
+        indexes: indexes);
 
     bool isPast = months[selectedIndex].difference(DateTime.now()).isNegative;
 

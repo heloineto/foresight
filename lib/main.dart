@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:foresight/routes.dart';
 import 'package:foresight/firebase_options.dart';
 import 'package:foresight/services/firestore.dart';
+import 'package:foresight/services/indexes.dart';
 import 'package:foresight/services/models.dart';
 import 'package:foresight/shared/snapshot_states/error_state.dart';
 import 'package:foresight/theme.dart';
@@ -47,15 +48,21 @@ class _AppState extends State<App> {
           create: (_) => FirestoreService().streamInvestments(),
           initialData: const [],
           builder: (context, snapshot) {
-            return MaterialApp(
-              title: 'Foresight',
-              routes: routes,
-              theme: theme,
-              localizationsDelegates: const [
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate
-              ],
-              supportedLocales: const [Locale('pt', 'BR')],
+            return FutureProvider<Map<String, dynamic>?>(
+              create: (_) => IndexesService().fetchIndexes(),
+              initialData: null,
+              builder: (context, snapshot) {
+                return MaterialApp(
+                  title: 'Foresight',
+                  routes: routes,
+                  theme: theme,
+                  localizationsDelegates: const [
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate
+                  ],
+                  supportedLocales: const [Locale('pt', 'BR')],
+                );
+              },
             );
           },
         );
