@@ -8,7 +8,8 @@ import 'package:foresight/services/models.dart';
 import 'package:foresight/settings/settings.dart';
 
 Map<String, Widget Function(BuildContext)> routes = {
-  '/': (context) => const BiometricsPage(),
+  '/': (context) => const HomePage(),
+  '/biometrics': (context) => const BiometricsPage(),
   '/investments': (context) => const InvestmentsPage(),
   '/investments/create': (context) => const InvestmentsFormPage(),
   '/investment': (context) {
