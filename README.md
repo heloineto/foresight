@@ -22,6 +22,7 @@ Melhorias:
 -   Possibilidade de navegar pelos meses e ver previsões
 -   Melhoria na tela de cada investimento individual
 -   Resolvido o bug da bottom bar
+-   Resolvido o bug do texto vermelho sublinhado de amarelo
 
 Uso de uma API Web:
 

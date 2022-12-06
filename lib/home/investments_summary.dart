@@ -94,16 +94,18 @@ class _InvestmentsSummaryState extends State<InvestmentsSummary> {
           ),
           Expanded(
             flex: 3,
-            child: InvestmentChart(
-              prices: prices,
-              months: getNMonths(7),
-              onChangeSelectedIndex: (index) {
-                setState(() => selectedIndex = index);
-              },
-              selectedIndex: selectedIndex,
-              previousPrice: previousPrice,
-              nextPrice: nextPrice,
-            ),
+            child: indexes != null
+                ? InvestmentChart(
+                    prices: prices,
+                    months: getNMonths(7),
+                    onChangeSelectedIndex: (index) {
+                      setState(() => selectedIndex = index);
+                    },
+                    selectedIndex: selectedIndex,
+                    previousPrice: previousPrice,
+                    nextPrice: nextPrice,
+                  )
+                : const Center(child: CircularProgressIndicator()),
           ),
         ],
       ),

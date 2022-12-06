@@ -94,7 +94,9 @@ class MainScaffold extends StatelessWidget {
               ),
               BottomBarButton(
                 onPressed: () {
-                  AuthService().signOut();
+                  AuthService().signOut().then((_) {
+                    localAuthService.locallyAuthenticated = false;
+                  });
 
                   Navigator.pushNamedAndRemoveUntil(
                     context,

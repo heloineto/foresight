@@ -11,6 +11,8 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var localAuthService = Provider.of<LocalAuthService>(context);
+
     return MainScaffold(
       body: SafeArea(
         child: Padding(
@@ -34,9 +36,9 @@ class SettingsPage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    AuthService().signOut();
-                    Provider.of<LocalAuthService>(context)
-                        .locallyAuthenticated = false;
+                    AuthService().signOut().then((_) {
+                      localAuthService.locallyAuthenticated = false;
+                    });
 
                     Navigator.pushNamedAndRemoveUntil(
                       context,
