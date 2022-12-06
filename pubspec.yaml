@@ -52,6 +52,7 @@ dependencies:
     jiffy: ^5.0.0
     devicelocale: ^0.5.5
     http: ^0.13.5
+    local_auth: ^2.1.2
 
 dev_dependencies:
     flutter_test:
