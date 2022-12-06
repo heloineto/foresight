@@ -4,7 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 
 class BiometricsPage extends StatefulWidget {
-  const BiometricsPage({Key? key}) : super(key: key);
+  final void Function() onSuccess;
+  final void Function() onUnsupported;
+  const BiometricsPage({
+    super.key,
+    required this.onSuccess,
+    required this.onUnsupported,
+  });
 
   @override
   State<BiometricsPage> createState() => _BiometricsPageState();
@@ -14,7 +20,6 @@ class _BiometricsPageState extends State<BiometricsPage> {
   final LocalAuthentication auth = LocalAuthentication();
   _SupportState _supportState = _SupportState.unknown;
   bool? _canCheckBiometrics;
-  List<BiometricType>? _availableBiometrics;
   String _authorized = 'Not Authorized';
   bool _isAuthenticating = false;
 
@@ -22,10 +27,17 @@ class _BiometricsPageState extends State<BiometricsPage> {
   void initState() {
     super.initState();
     auth.isDeviceSupported().then(
-          (bool isSupported) => setState(() => _supportState = isSupported
-              ? _SupportState.supported
-              : _SupportState.unsupported),
-        );
+      (bool isSupported) {
+        setState(() {
+          _supportState =
+              isSupported ? _SupportState.supported : _SupportState.unsupported;
+        });
+
+        if (!isSupported) {
+          widget.onUnsupported();
+        }
+      },
+    );
   }
 
   Future<void> _checkBiometrics() async {
@@ -45,23 +57,6 @@ class _BiometricsPageState extends State<BiometricsPage> {
     });
   }
 
-  Future<void> _getAvailableBiometrics() async {
-    late List<BiometricType> availableBiometrics;
-    try {
-      availableBiometrics = await auth.getAvailableBiometrics();
-    } on PlatformException catch (e) {
-      availableBiometrics = <BiometricType>[];
-      print(e);
-    }
-    if (!mounted) {
-      return;
-    }
-
-    setState(() {
-      _availableBiometrics = availableBiometrics;
-    });
-  }
-
   Future<void> _authenticate() async {
     bool authenticated = false;
     try {
@@ -70,54 +65,18 @@ class _BiometricsPageState extends State<BiometricsPage> {
         _authorized = 'Authenticating';
       });
       authenticated = await auth.authenticate(
-        localizedReason: 'Let OS determine authentication method',
-        options: const AuthenticationOptions(
-          stickyAuth: true,
-        ),
-      );
-      setState(() {
-        _isAuthenticating = false;
-      });
-    } on PlatformException catch (e) {
-      print(e);
-      setState(() {
-        _isAuthenticating = false;
-        _authorized = 'Error - ${e.message}';
-      });
-      return;
-    }
-    if (!mounted) {
-      return;
-    }
-
-    setState(
-        () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
-  }
-
-  Future<void> _authenticateWithBiometrics() async {
-    bool authenticated = false;
-    try {
-      setState(() {
-        _isAuthenticating = true;
-        _authorized = 'Authenticating';
-      });
-      authenticated = await auth.authenticate(
         localizedReason:
-            'Scan your fingerprint (or face or whatever) to authenticate',
-        options: const AuthenticationOptions(
-          stickyAuth: true,
-          biometricOnly: true,
-        ),
+            'Verifique sua identidade para ver suas informações financeiras',
+        options: const AuthenticationOptions(stickyAuth: true),
       );
       setState(() {
         _isAuthenticating = false;
-        _authorized = 'Authenticating';
       });
-    } on PlatformException catch (e) {
-      print(e);
+    } on PlatformException catch (error) {
+      debugPrint(error.toString());
       setState(() {
         _isAuthenticating = false;
-        _authorized = 'Error - ${e.message}';
+        _authorized = 'Error - ${error.message}';
       });
       return;
     }
@@ -125,10 +84,13 @@ class _BiometricsPageState extends State<BiometricsPage> {
       return;
     }
 
-    final String message = authenticated ? 'Authorized' : 'Not Authorized';
     setState(() {
-      _authorized = message;
+      _authorized = authenticated ? 'Authorized' : 'Not Authorized';
     });
+
+    if (authenticated) {
+      widget.onSuccess();
+    }
   }
 
   Future<void> _cancelAuthentication() async {
@@ -140,76 +102,57 @@ class _BiometricsPageState extends State<BiometricsPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: ListView(
-          padding: const EdgeInsets.only(top: 30),
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                if (_supportState == _SupportState.unknown)
-                  const CircularProgressIndicator()
-                else if (_supportState == _SupportState.supported)
-                  const Text('This device is supported')
-                else
-                  const Text('This device is not supported'),
-                const Divider(height: 100),
-                Text('Can check biometrics: $_canCheckBiometrics\n'),
-                ElevatedButton(
-                  onPressed: _checkBiometrics,
-                  child: const Text('Check biometrics'),
-                ),
-                const Divider(height: 100),
-                Text('Available biometrics: $_availableBiometrics\n'),
-                ElevatedButton(
-                  onPressed: _getAvailableBiometrics,
-                  child: const Text('Get available biometrics'),
-                ),
-                const Divider(height: 100),
-                Text('Current State: $_authorized\n'),
-                if (_isAuthenticating)
+        body: SafeArea(
+          child: ListView(
+            padding: const EdgeInsets.only(top: 30),
+            children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  if (_supportState == _SupportState.unknown)
+                    const CircularProgressIndicator()
+                  else if (_supportState == _SupportState.supported)
+                    const Text('This device is supported')
+                  else
+                    const Text('This device is not supported'),
+                  const Divider(height: 100),
+                  Text('Can check biometrics: $_canCheckBiometrics\n'),
                   ElevatedButton(
-                    onPressed: _cancelAuthentication,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: const <Widget>[
-                        Text('Cancel Authentication'),
-                        Icon(Icons.cancel),
+                    onPressed: _checkBiometrics,
+                    child: const Text('Check biometrics'),
+                  ),
+                  const Divider(height: 100),
+                  Text('Current State: $_authorized\n'),
+                  if (_isAuthenticating)
+                    ElevatedButton(
+                      onPressed: _cancelAuthentication,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: const <Widget>[
+                          Text('Cancel Authentication'),
+                          Icon(Icons.cancel),
+                        ],
+                      ),
+                    )
+                  else
+                    Column(
+                      children: <Widget>[
+                        ElevatedButton(
+                          onPressed: _authenticate,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: const <Widget>[
+                              Text('Authenticate'),
+                              Icon(Icons.perm_device_information),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
-                  )
-                else
-                  Column(
-                    children: <Widget>[
-                      ElevatedButton(
-                        onPressed: _authenticate,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: const <Widget>[
-                            Text('Authenticate'),
-                            Icon(Icons.perm_device_information),
-                          ],
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: _authenticateWithBiometrics,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Text(_isAuthenticating
-                                ? 'Cancel'
-                                : 'Authenticate: biometrics only'),
-                            const Icon(Icons.fingerprint),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

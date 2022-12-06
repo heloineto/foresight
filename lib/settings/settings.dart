@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:foresight/services/auth.dart';
+import 'package:foresight/services/local_auth.dart';
 import 'package:foresight/shared/main_scaffold/main_scaffold.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -33,6 +35,8 @@ class SettingsPage extends StatelessWidget {
                   ),
                   onPressed: () {
                     AuthService().signOut();
+                    Provider.of<LocalAuthService>(context)
+                        .locallyAuthenticated = false;
 
                     Navigator.pushNamedAndRemoveUntil(
                       context,

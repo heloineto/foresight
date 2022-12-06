@@ -4,6 +4,7 @@ import 'package:foresight/routes.dart';
 import 'package:foresight/firebase_options.dart';
 import 'package:foresight/services/firestore.dart';
 import 'package:foresight/services/indexes.dart';
+import 'package:foresight/services/local_auth.dart';
 import 'package:foresight/services/models.dart';
 import 'package:foresight/shared/snapshot_states/error_state.dart';
 import 'package:foresight/theme.dart';
@@ -52,15 +53,18 @@ class _AppState extends State<App> {
               create: (_) => IndexesService().fetchIndexes(),
               initialData: null,
               builder: (context, snapshot) {
-                return MaterialApp(
-                  title: 'Foresight',
-                  routes: routes,
-                  theme: theme,
-                  localizationsDelegates: const [
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate
-                  ],
-                  supportedLocales: const [Locale('pt', 'BR')],
+                return ChangeNotifierProvider(
+                  create: (_) => LocalAuthService(),
+                  child: MaterialApp(
+                    title: 'Foresight',
+                    routes: routes,
+                    theme: theme,
+                    localizationsDelegates: const [
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate
+                    ],
+                    supportedLocales: const [Locale('pt', 'BR')],
+                  ),
                 );
               },
             );
