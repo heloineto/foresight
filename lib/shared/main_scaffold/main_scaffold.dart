@@ -34,7 +34,7 @@ class MainScaffold extends StatelessWidget {
                     backgroundColor: TW3Colors.emerald,
                     child: const Icon(PhosphorIcons.currencyDollarSimple),
                   )
-                : SizedBox(),
+                : const SizedBox(),
           );
         },
       ),

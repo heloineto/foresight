@@ -7,8 +7,8 @@ class InvestmentsHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.maxFinite,
-      margin: EdgeInsets.all(25),
-      child: Text(
+      margin: const EdgeInsets.all(25),
+      child: const Text(
         'Investimentos',
         style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
       ),

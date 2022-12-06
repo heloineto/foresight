@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-const List<String> banks = <String>[
-  'Nubank',
-];
-
 class BankField extends StatelessWidget {
   final void Function(String?)? onSaved;
   final String? initialValue;

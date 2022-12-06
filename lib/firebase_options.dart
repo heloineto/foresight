@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '646109710642',
     projectId: 'foresight-investment-tracker',
     storageBucket: 'foresight-investment-tracker.appspot.com',
-    iosClientId: '646109710642-a3uo48q9411kt9i4aqmhqoef45ts81uh.apps.googleusercontent.com',
+    iosClientId:
+        '646109710642-a3uo48q9411kt9i4aqmhqoef45ts81uh.apps.googleusercontent.com',
     iosBundleId: 'com.example.foresight',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '646109710642',
     projectId: 'foresight-investment-tracker',
     storageBucket: 'foresight-investment-tracker.appspot.com',
-    iosClientId: '646109710642-a3uo48q9411kt9i4aqmhqoef45ts81uh.apps.googleusercontent.com',
+    iosClientId:
+        '646109710642-a3uo48q9411kt9i4aqmhqoef45ts81uh.apps.googleusercontent.com',
     iosBundleId: 'com.example.foresight',
   );
 }

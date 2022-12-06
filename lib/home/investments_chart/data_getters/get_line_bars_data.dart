@@ -32,8 +32,8 @@ List<LineChartBarData> getLineBarsData({required List<FlSpot> spots}) {
       ),
       belowBarData: BarAreaData(
         show: true,
-        gradientFrom: Offset(0, 0),
-        gradientTo: Offset(0, 1),
+        gradientFrom: const Offset(0, 0),
+        gradientTo: const Offset(0, 1),
         colors: [
           TW3Colors.emerald.shade500.withOpacity(0.1),
           TW3Colors.emerald.shade500.withOpacity(0),

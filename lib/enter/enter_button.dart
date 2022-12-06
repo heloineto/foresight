@@ -23,7 +23,7 @@ class EnterButton extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: MaterialButton(
         onPressed: onPressed,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         color: color,
         minWidth: double.maxFinite,
         child: Row(
@@ -35,14 +35,14 @@ class EnterButton extends StatelessWidget {
             ),
             Text(
               text,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
                 letterSpacing: 1,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 23,
             ),
           ],

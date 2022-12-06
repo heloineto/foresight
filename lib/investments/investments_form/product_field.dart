@@ -23,7 +23,7 @@ class ProductField extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownField(
       hintText: 'Produto',
-      label: Text('Produto'),
+      label: const Text('Produto'),
       items: products.map((value) {
         return DropdownMenuItem<String>(
           value: value,

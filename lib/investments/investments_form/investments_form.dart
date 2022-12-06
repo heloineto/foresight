@@ -109,9 +109,10 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
                   currentInvestment == null
                       ? 'Criar Investimento'
                       : 'Editar Investimento',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 30, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ProductField(
                   initialValue: currentInvestment?.product,
                   onSaved: (value) => setState(() => product = value),
@@ -121,12 +122,12 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
                   initialValue: currentInvestment?.bank,
                   onSaved: (value) => setState(() => bank = value),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 OperationDateField(
                   initialValue: currentInvestment?.startDate,
                   onSaved: (value) => setState(() => startDate = value),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 VestingDateField(
                   initialValue: currentInvestment?.endDate,
                   onSaved: (value) => setState(() => endDate = value),
@@ -139,12 +140,12 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
                     price = value.substring(3);
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 IndexField(
                   initialValue: currentInvestment?.index,
                   onSaved: (value) => setState(() => index = value),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ReturnRateField(
                   initialValue: currentInvestment?.returnRate,
                   onSaved: (value) => setState(() {
@@ -152,7 +153,7 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
                     returnRate = value.substring(2);
                   }),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 SizedBox(
                   height: 52,
                   width: double.infinity,
@@ -176,11 +177,11 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
                       currentInvestment == null
                           ? 'Criar Investimento'
                           : 'Editar Investimento',
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 json != null
                     ? Container(
                         decoration: BoxDecoration(
@@ -188,13 +189,14 @@ class _InvestmentsFormState extends State<InvestmentsForm> {
                           border: Border.all(
                             color: TW3Colors.slate.shade400,
                           ),
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(5)),
                         ),
                         width: double.infinity,
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         child: Text(json ?? ''),
                       )
-                    : SizedBox(height: 0),
+                    : const SizedBox(),
               ],
             ),
           ),

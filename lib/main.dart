@@ -32,14 +32,14 @@ class _AppState extends State<App> {
       future: _initialization,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 16),
+          return const Padding(
+            padding: EdgeInsets.only(top: 16),
             child: ErrorState(text: 'Erro ao conectar com o servidor'),
           );
         }
 
         if (snapshot.connectionState != ConnectionState.done) {
-          return CircularProgressIndicator(
+          return const CircularProgressIndicator(
             semanticsLabel: 'Circular progress indicator',
           );
         }

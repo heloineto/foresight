@@ -12,24 +12,24 @@ class EnterPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(25),
+          padding: const EdgeInsets.all(25),
           width: double.maxFinite,
           color: TW3Colors.slate[100],
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Transform.translate(
-                offset: Offset(-7, 22),
-                child: Text(
+                offset: const Offset(-7, 22),
+                child: const Text(
                   'Entrar',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 100),
                 ),
               ),
-              Text(
+              const Text(
                 'Ou crie sua conta',
                 style: TextStyle(fontSize: 20),
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               EnterButton(
                 color: TW3Colors.slate.shade500,
                 icon: PhosphorIcons.googleLogoFill,

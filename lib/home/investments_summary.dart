@@ -64,18 +64,21 @@ class _InvestmentsSummaryState extends State<InvestmentsSummary> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: 15, bottom: 8),
-                  child: Text(
+                  margin: const EdgeInsets.only(top: 15, bottom: 8),
+                  child: const Text(
                     'Seu saldo atual é de:',
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
                 Text(
                   doubleToBrl(prices[selectedIndex]),
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 42),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 42,
+                  ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(
+                  margin: const EdgeInsets.only(
                     top: 10,
                     right: 30,
                     bottom: 30,
@@ -83,7 +86,7 @@ class _InvestmentsSummaryState extends State<InvestmentsSummary> {
                   ),
                   child: Text(
                     'Seu dinheiro ${isPast ? "rendeu" : "renderá"} ${getMonthlyRate(prices, selectedIndex)} esse mês.',
-                    style: TextStyle(fontSize: 12),
+                    style: const TextStyle(fontSize: 12),
                   ),
                 ),
               ],

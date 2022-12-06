@@ -11,8 +11,6 @@ class IndexesService {
       throw Exception('Failed to fetch indexes');
     }
 
-    print(json.decode(response.body));
-
     return json.decode(response.body);
   }
 }

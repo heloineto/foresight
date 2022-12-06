@@ -27,7 +27,7 @@ class InvestmentPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 InvestmentHeader(investment: investment),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 InvestmentSummary(investment: investment),
                 Divider(height: 40, color: TW3Colors.slate.shade500),
                 Padding(
@@ -35,7 +35,7 @@ class InvestmentPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -51,7 +51,7 @@ class InvestmentPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 40),
+                      const SizedBox(height: 40),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -66,7 +66,7 @@ class InvestmentPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 40),
+                      const SizedBox(height: 40),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -84,7 +84,7 @@ class InvestmentPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 30),
+                      const SizedBox(height: 30),
                     ],
                   ),
                 )

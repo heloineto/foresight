@@ -15,8 +15,8 @@ class InvestmentsColumn extends StatelessWidget {
     return Expanded(
       child: SingleChildScrollView(
         child: investments.isEmpty
-            ? Padding(
-                padding: const EdgeInsets.only(top: 16),
+            ? const Padding(
+                padding: EdgeInsets.only(top: 16),
                 child: EmptyState(text: 'Você ainda não tem investimentos'),
               )
             : Column(

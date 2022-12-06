@@ -106,7 +106,7 @@ class _InvestmentChartState extends State<InvestmentChart> {
             titlesData: getTitlesData(months: widget.months),
             lineBarsData: getLineBarsData(spots: spots),
           ),
-          swapAnimationDuration: Duration(milliseconds: 500),
+          swapAnimationDuration: const Duration(milliseconds: 500),
           swapAnimationCurve: Curves.easeInOut,
         ),
         MonthsIndicator(

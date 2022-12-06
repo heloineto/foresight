@@ -12,7 +12,7 @@ class SettingsPage extends StatelessWidget {
     return MainScaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(25),
+          padding: const EdgeInsets.all(25),
           child: Column(
             children: [
               SizedBox(

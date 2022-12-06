@@ -24,7 +24,7 @@ class DateField extends StatelessWidget {
     return DateTimeField(
       format: format,
       decoration: InputDecoration(
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         hintText: hintText,
         label: label,
       ),

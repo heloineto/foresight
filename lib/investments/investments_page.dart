@@ -7,10 +7,10 @@ class InvestmentsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MainScaffold(
+    return const MainScaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: EdgeInsets.only(top: 16),
           child: Investments(),
         ),
       ),

@@ -43,7 +43,7 @@ class InvestmentItem extends StatelessWidget {
       ),
       child: Slidable(
         endActionPane: ActionPane(
-          motion: ScrollMotion(),
+          motion: const ScrollMotion(),
           children: [
             SlidableAction(
               onPressed: (context) => onEdit(context, investment),

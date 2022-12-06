@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
         }
 
         if (!snapshot.hasData) {
-          return EnterPage();
+          return const EnterPage();
         }
 
         return MainScaffold(
@@ -57,15 +57,15 @@ class HomePage extends StatelessWidget {
                     flex: 1,
                     child: Container(
                       color: TW3Colors.slate.shade200,
-                      child: InvestmentsSummary(),
+                      child: const InvestmentsSummary(),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Expanded(
                     flex: 1,
                     child: GestureDetector(
                       onTap: () => Navigator.pushNamed(context, '/investments'),
-                      child: Investments(),
+                      child: const Investments(),
                     ),
                   ),
                 ]),

@@ -20,7 +20,7 @@ class IndexField extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownField(
       hintText: 'Indexador',
-      label: Text('Indexador'),
+      label: const Text('Indexador'),
       items: indexes.map((value) {
         return DropdownMenuItem<String>(
           value: value,

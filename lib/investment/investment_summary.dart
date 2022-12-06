@@ -60,7 +60,7 @@ class _InvestmentSummaryState extends State<InvestmentSummary> {
                   color: TW3Colors.slate.shade700,
                 ),
               ),
-              SizedBox(height: 6),
+              const SizedBox(height: 6),
               Text(
                 '${isPast ? "rendeu" : "renderá"} ${getMonthlyRate(prices, selectedIndex)} esse mês',
                 style: TextStyle(
@@ -72,7 +72,7 @@ class _InvestmentSummaryState extends State<InvestmentSummary> {
             ],
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         SizedBox(
           height: 250,
           child: InvestmentChart(
