@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:tailwind_colors/tailwind_colors.dart';
 
 class BiometricsPage extends StatefulWidget {
   final void Function() onSuccess;
@@ -18,10 +20,10 @@ class BiometricsPage extends StatefulWidget {
 
 class _BiometricsPageState extends State<BiometricsPage> {
   final LocalAuthentication auth = LocalAuthentication();
-  _SupportState _supportState = _SupportState.unknown;
-  bool? _canCheckBiometrics;
-  String _authorized = 'Not Authorized';
-  bool _isAuthenticating = false;
+  SupportState supportState = SupportState.unknown;
+  bool? canCheckBiometrics;
+  String authorizedState = 'Não iniciada';
+  bool isAuthenticating = false;
 
   @override
   void initState() {
@@ -29,8 +31,8 @@ class _BiometricsPageState extends State<BiometricsPage> {
     auth.isDeviceSupported().then(
       (bool isSupported) {
         setState(() {
-          _supportState =
-              isSupported ? _SupportState.supported : _SupportState.unsupported;
+          supportState =
+              isSupported ? SupportState.supported : SupportState.unsupported;
         });
 
         if (!isSupported) {
@@ -38,31 +40,33 @@ class _BiometricsPageState extends State<BiometricsPage> {
         }
       },
     );
+
+    checkBiometrics();
   }
 
-  Future<void> _checkBiometrics() async {
-    late bool canCheckBiometrics;
+  Future<void> checkBiometrics() async {
+    late bool authCanCheckBiometrics;
     try {
-      canCheckBiometrics = await auth.canCheckBiometrics;
-    } on PlatformException catch (e) {
-      canCheckBiometrics = false;
-      print(e);
+      authCanCheckBiometrics = await auth.canCheckBiometrics;
+    } on PlatformException catch (error) {
+      authCanCheckBiometrics = false;
+      debugPrint(error.toString());
     }
     if (!mounted) {
       return;
     }
 
     setState(() {
-      _canCheckBiometrics = canCheckBiometrics;
+      canCheckBiometrics = authCanCheckBiometrics;
     });
   }
 
-  Future<void> _authenticate() async {
+  Future<void> authenticate() async {
     bool authenticated = false;
     try {
       setState(() {
-        _isAuthenticating = true;
-        _authorized = 'Authenticating';
+        isAuthenticating = true;
+        authorizedState = 'Autenticando...';
       });
       authenticated = await auth.authenticate(
         localizedReason:
@@ -70,13 +74,13 @@ class _BiometricsPageState extends State<BiometricsPage> {
         options: const AuthenticationOptions(stickyAuth: true),
       );
       setState(() {
-        _isAuthenticating = false;
+        isAuthenticating = false;
       });
     } on PlatformException catch (error) {
       debugPrint(error.toString());
       setState(() {
-        _isAuthenticating = false;
-        _authorized = 'Error - ${error.message}';
+        isAuthenticating = false;
+        authorizedState = 'Erro: ${error.message}';
       });
       return;
     }
@@ -85,7 +89,7 @@ class _BiometricsPageState extends State<BiometricsPage> {
     }
 
     setState(() {
-      _authorized = authenticated ? 'Authorized' : 'Not Authorized';
+      authorizedState = authenticated ? 'Autorizada' : 'Não Autorizada';
     });
 
     if (authenticated) {
@@ -93,73 +97,91 @@ class _BiometricsPageState extends State<BiometricsPage> {
     }
   }
 
-  Future<void> _cancelAuthentication() async {
-    await auth.stopAuthentication();
-    setState(() => _isAuthenticating = false);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.only(top: 30),
-            children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  if (_supportState == _SupportState.unknown)
-                    const CircularProgressIndicator()
-                  else if (_supportState == _SupportState.supported)
-                    const Text('This device is supported')
-                  else
-                    const Text('This device is not supported'),
-                  const Divider(height: 100),
-                  Text('Can check biometrics: $_canCheckBiometrics\n'),
-                  ElevatedButton(
-                    onPressed: _checkBiometrics,
-                    child: const Text('Check biometrics'),
-                  ),
-                  const Divider(height: 100),
-                  Text('Current State: $_authorized\n'),
-                  if (_isAuthenticating)
-                    ElevatedButton(
-                      onPressed: _cancelAuthentication,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: const <Widget>[
-                          Text('Cancel Authentication'),
-                          Icon(Icons.cancel),
-                        ],
-                      ),
-                    )
-                  else
-                    Column(
-                      children: <Widget>[
-                        ElevatedButton(
-                          onPressed: _authenticate,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: const <Widget>[
-                              Text('Authenticate'),
-                              Icon(Icons.perm_device_information),
-                            ],
-                          ),
+    return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: SizedBox(
+        height: 150,
+        child: Column(
+          children: [
+            const Text('Pressione o botão abaixo para autenticar'),
+            const SizedBox(height: 20),
+            SizedBox(
+              height: 80,
+              width: 80,
+              child: FittedBox(
+                child: FloatingActionButton(
+                  elevation: 0,
+                  hoverElevation: 0,
+                  focusElevation: 0,
+                  disabledElevation: 0,
+                  highlightElevation: 0,
+                  tooltip: 'Autenticar',
+                  onPressed: () {
+                    if (!isAuthenticating) {
+                      authenticate();
+                    }
+                  },
+                  backgroundColor: TW3Colors.emerald,
+                  child: isAuthenticating
+                      ? const Padding(
+                          padding: EdgeInsets.all(15.0),
+                          child: CircularProgressIndicator(color: Colors.white),
+                        )
+                      : const Icon(
+                          PhosphorIcons.fingerprintBold,
+                          color: Colors.white,
                         ),
-                      ],
-                    ),
-                ],
+                ),
               ),
-            ],
-          ),
+            ),
+          ],
+        ),
+      ),
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.only(top: 30),
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset(
+                  'lib/assets/icon.png',
+                  height: 100,
+                  width: 100,
+                ),
+                const SizedBox(height: 50),
+                if (supportState == SupportState.unknown)
+                  const CircularProgressIndicator()
+                else
+                  Text(
+                    supportState == SupportState.supported
+                        ? 'Este dispositivo suporta autentificação local'
+                        : 'Este dispositivo NÃO suporta autentificação local',
+                  ),
+                const Divider(height: 100),
+                if (canCheckBiometrics != null)
+                  Text(
+                    canCheckBiometrics!
+                        ? 'Este dispositivo possui sensores biométricos'
+                        : 'Este dispositivo NÃO possui sensores biométricos',
+                  )
+                else
+                  const CircularProgressIndicator(),
+                const Divider(height: 100),
+                Text('Estado da autentificação: $authorizedState\n'),
+                const SizedBox(height: 100),
+              ],
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-enum _SupportState {
+enum SupportState {
   unknown,
   supported,
   unsupported,

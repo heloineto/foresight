@@ -50,7 +50,10 @@ class MainScaffold extends StatelessWidget {
                       Navigator.pushNamed(context, '/investments/create');
                     },
                     backgroundColor: TW3Colors.emerald,
-                    child: const Icon(PhosphorIcons.currencyDollarSimple),
+                    child: const Icon(
+                      PhosphorIcons.currencyDollarSimpleBold,
+                      color: Colors.white,
+                    ),
                   )
                 : const SizedBox(),
           );
