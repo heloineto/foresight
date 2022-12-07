@@ -171,7 +171,6 @@ class _BiometricsPageState extends State<BiometricsPage> {
                   const CircularProgressIndicator(),
                 const Divider(height: 100),
                 Text('Estado da autentificação: $authorizedState\n'),
-                const SizedBox(height: 100),
               ],
             ),
           ],
